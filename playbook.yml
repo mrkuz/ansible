@@ -1,7 +1,6 @@
 ---
 - name: Set up base
   hosts: all
-  remote_user: user
-
   roles:
-    - desktop
+    - base
+    - gnome
