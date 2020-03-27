@@ -2,4 +2,5 @@
 all:
   hosts:
     vbox:
+      remote_user: user
       ansible_host: 192.168.56.102

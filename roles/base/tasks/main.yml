@@ -1,6 +1,0 @@
----
-- name: Install packages
-  become: yes
-  apt:
-    name:
-      - git

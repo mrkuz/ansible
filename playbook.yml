@@ -4,4 +4,4 @@
   remote_user: user
 
   roles:
-    - base
+    - desktop

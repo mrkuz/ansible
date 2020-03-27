@@ -1,0 +1,22 @@
+---
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - ubuntu-desktop-minimal
+
+- name: Remove unused packages
+  become: yes
+  apt:
+    state: absent
+    purge: yes
+    name:
+      - byobu
+      - firefox
+
+- name: Clean up
+  become: yes
+  apt:
+    autoremove: yes
+    autoclean: yes
