@@ -1,2 +1,2 @@
 #!/bin/bash
-ansible-playbook -K -i inventory.yml playbook.yml -v
+ansible-playbook -K -i inventory.yml playbook.yml
