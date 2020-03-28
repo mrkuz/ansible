@@ -25,24 +25,21 @@
     channel: 13/stable
     name: node
 
-- name: Install postman
+- name: Install flatpaks
   become: yes
   flatpak:
     name: com.getpostman.Postman
 
-- name: Install mitmproxy
+- name: Install pip packages
   become: yes
   pip:
     executable: pip3
-    name: mitmproxy
+    name: "{{ item }}"
+  with_items:
+    - mitmproxy
+    - frida-tools
 
-- name: Install frida-tools
-  become: yes
-  pip:
-    executable: pip3
-    name: frida-tools
-
-- name: Install gulp
+- name: Install npm packages
   become: yes
   npm:
     name: gulp
