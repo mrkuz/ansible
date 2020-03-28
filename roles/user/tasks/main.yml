@@ -29,6 +29,20 @@
     - "{{ home }}/tmp"
     - "{{ home }}/Videos"
     - "{{ home }}/Workspace"
+    - "{{ home }}/.gradle"
+    - "{{ home }}/.config/Code"
+    - "{{ home }}/.config/Code/User"
+    - "{{ home }}/.config/fish"
+    - "{{ home }}/.config/fish/functions/"
+    - "{{ home }}/.vscode/DevOps"
+    - "{{ home }}/.vscode/DevOps/extensions"
+    - "{{ home }}/.vscode/DevOps/User"
+    - "{{ home }}/.vscode/Java"
+    - "{{ home }}/.vscode/Java/extensions"
+    - "{{ home }}/.vscode/Java/User"
+    - "{{ home }}/.vscode/JavaScript"
+    - "{{ home }}/.vscode/JavaScript/extensions"
+    - "{{ home }}/.vscode/JavaScript/User"
 
 - name: "Clone repositories"
   become: yes
@@ -49,3 +63,43 @@
       dest: etc/doom.d
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
+
+- name: Link dotfiles
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "{{ home }}/etc/dotfiles.git/{{ item }}"
+    dest: "{{ home }}/{{ item }}"
+    state: link
+  with_items:
+    - bin/fsh
+    - .bashrc.local
+    - .config/Code/User/keybindings.json
+    - .config/Code/User/settings.json
+    - .config/fish/config.fish
+    - .config/fish/fish_variables
+    - .config/fish/functions/fish_prompt.fish
+    - .config/fish/functions/note.fish
+    - .config/fish/functions/scratch.fish
+    - .config/fish/functions/todo.fish
+    - .config/fish/functions/x11d.fish
+    - .eclipse-java-style.xml
+    - .gradle/gradle.properties
+    - .inputrc
+    - .tmux.conf
+    - .shortcuts.json
+
+- name: Set up vscode profiles
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "{{ home }}/etc/dotfiles.git/.config/Code/User/{{ item.file }}"
+    dest: "{{ home }}/.vscode/{{ item.profile }}/User/{{ item.file }}"
+    state: link
+  with_items:
+    - { profile: DevOps, file: settings.json }
+    - { profile: DevOps, file: keybindings.json }
+    - { profile: Java, file: settings.json }
+    - { profile: Java, file: keybindings.json }
+    - { profile: JavaScript, file: settings.json }
+    - { profile: JavaScript, file: keybindings.json }
