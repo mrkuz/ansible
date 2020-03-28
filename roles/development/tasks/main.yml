@@ -1,0 +1,26 @@
+---
+- name: Install snaps (classic)
+  become: yes
+  snap:
+    classic: true
+    name:
+      - android-studio
+      - intellij-idea-community
+      - code
+      - go
+      - netbeans
+      - protobuf
+
+- name: Install snaps
+  become: yes
+  snap:
+    name:
+      - hugo
+      - robo3t-snap
+
+- name: Install node
+  become: yes
+  snap:
+    classic: true
+    channel: 13/stable
+    name: node

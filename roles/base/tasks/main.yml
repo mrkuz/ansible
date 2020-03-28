@@ -1,4 +1,10 @@
 ---
+- name: Enable i386
+  become: yes
+  command: dpkg --add-architecture i386
+  args:
+    creates: /var/lib/dpkg/arch
+
 - name: Install flatpak
   become: yes
   apt:

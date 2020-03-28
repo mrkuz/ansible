@@ -3,8 +3,7 @@
   become: yes
   snap:
     classic: true
-    name:
-      - emacs
+    name: emacs
 
 - name: Install dependencies
   become: yes
