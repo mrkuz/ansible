@@ -1,2 +1,3 @@
 user: markus
 fullName: Markus
+home: "/home/{{ user }}"

@@ -7,3 +7,35 @@
     groups: adm,cdrom,dip,lpadmin,lxd,plugdev,sudo
     append: yes
   notify: Reset password
+
+- name: Create home directory
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0775
+  with_items:
+    - "{{ home }}/Backup"
+    - "{{ home }}/bin"
+    - "{{ home }}/Documents"
+    - "{{ home }}/Downloads"
+    - "{{ home }}/Downloads/Torrent"
+    - "{{ home }}/etc"
+    - "{{ home }}/Games"
+    - "{{ home }}/Games/Steam"
+    - "{{ home }}/Music"
+    - "{{ home }}/Notes"
+    - "{{ home }}/opt"
+    - "{{ home }}/org"
+    - "{{ home }}/org/lists"
+    - "{{ home }}/org/mobile"
+    - "{{ home }}/org/projects"
+    - "{{ home }}/Pictures"
+    - "{{ home }}/Scripts"
+    - "{{ home }}/Shared"
+    - "{{ home }}/src"
+    - "{{ home }}/tmp"
+    - "{{ home }}/Videos"
+    - "{{ home }}/Workspace"
