@@ -1,5 +1,5 @@
 ---
-- name: Install Emacs
+- name: Install emacs
   become: yes
   snap:
     classic: true

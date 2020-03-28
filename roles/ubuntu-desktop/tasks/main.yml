@@ -7,7 +7,7 @@
       - ubuntu-desktop-minimal
       - ubuntu-artwork
       - ubuntu-restricted-extras
-      ---
+
 - name: Install libraries
   become: yes
   apt:
