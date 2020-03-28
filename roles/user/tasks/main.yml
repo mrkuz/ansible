@@ -31,6 +31,9 @@
     - "{{ home }}/Videos"
     - "{{ home }}/Workspace"
     - "{{ home }}/.gradle"
+    - "{{ home }}/.var"
+    - "{{ home }}/.ansible"
+    - "{{ home }}/.ansible/tmp"
     - "{{ home }}/.config/Code"
     - "{{ home }}/.config/Code/User"
     - "{{ home }}/.config/fish"
@@ -147,4 +150,26 @@
   get_url:
     url: https://downloads.sourceforge.net/project/plantuml/plantuml.jar
     dest: "{{ home}}/opt/plantuml/planuml.jar"
-    mode: 0755
+    mode: 0744
+
+- name: Install fisher
+  become: yes
+  become_user: "{{ user }}"
+  get_url:
+    url: https://github.com/jorgebucaran/fisher/blob/master/fisher.fish
+    dest: "{{ home}}/.config/fish/functions/fisher.fish"
+    mode: 0744
+
+- name: Set up fish
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+    set -U fish_greeting
+    fisher add jethrokuan/fzf
+    fisher add evanlucas/fish-kubectl-completions
+    set -e FZF_COMPLETE
+    echo OK > {{ home }}/.var/fish.done
+    exit 0
+  args:
+    executable: /usr/bin/fish
+    creates: "{{ home }}/.var/fish.done"
