@@ -1,4 +1,8 @@
 ---
+- name: Reset password
+  become: yes
+  command: passwd -d "{{ user }}"
+
 - name: Assign docker group
   become: yes
   command: adduser "{{ user }}" docker

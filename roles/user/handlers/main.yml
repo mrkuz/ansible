@@ -1,4 +1,0 @@
----
-- name: Reset password
-  become: yes
-  command: passwd -d "{{ user }}"

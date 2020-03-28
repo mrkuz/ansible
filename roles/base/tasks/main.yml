@@ -1,4 +1,14 @@
 ---
+- name: Add user
+  become: yes
+  user:
+    name: "{{ user }}"
+    comment: "{{ fullName }}"
+    shell: /bin/bash
+    groups: adm,cdrom,dip,lpadmin,lxd,plugdev,sudo
+    append: yes
+  notify: Reset password
+
 - name: Enable i386
   become: yes
   command: dpkg --add-architecture i386

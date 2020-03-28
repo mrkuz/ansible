@@ -1,20 +1,10 @@
-- name: Add user
+---
+- name: Create directories
   become: yes
-  user:
-    name: "{{ user }}"
-    comment: "{{ fullName }}"
-    shell: /bin/bash
-    groups: adm,cdrom,dip,lpadmin,lxd,plugdev,sudo
-    append: yes
-  notify: Reset password
-
-- name: Create home directory
-  become: yes
+  become_user: "{{ user }}"
   file:
     path: "{{ item }}"
     state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
     mode: 0775
   with_items:
     - "{{ home }}/Backup"
