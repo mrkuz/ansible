@@ -103,3 +103,10 @@
     - { profile: Java, file: keybindings.json }
     - { profile: JavaScript, file: settings.json }
     - { profile: JavaScript, file: keybindings.json }
+
+- name: Configure bash
+  become: yes
+  become_user: "{{ user }}"
+  lineinfile:
+    path: "{{ home }}/.bashrc"
+    line: . ~/.bashrc.local
