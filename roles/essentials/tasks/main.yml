@@ -4,9 +4,12 @@
   apt:
     update_cache: yes
     name:
-      - rclone
       - fish
       - fzf
+      - rclone
+      - ripgrep
+      - rsync
+      - tmux
 
 - name: Install snaps
   become: yes

@@ -23,10 +23,35 @@
   notify:
     - Assign docker group
 
+- name: Install python
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - python
+      - python3
+      - python3-pip
+      - python3-pyqt5
+
 - name: Install packages
   become: yes
   apt:
     update_cache: yes
     name:
+      - bridge-utils
+      - cifs-utils
+      - cgroup-tools
+      - curl
+      - dos2unix
       - git
       - gitk
+      - lm-sensors
+      - net-tools
+      - openvpn
+      - openvpn-systemd-resolved
+      - p7zip-full
+      - pwgen
+      - smartmontools
+      - tuptime
+      - unrar
+      - uuid
