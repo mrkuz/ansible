@@ -206,12 +206,14 @@
   become_user: "{{ user }}"
   command: id -u
   register: uid
+  changed_when: no
 
 - name: Get group id
   become: yes
   become_user: "{{ user }}"
   command: id -g
   register: gid
+  changed_when: no
 
 - name: Build docker images
   become: yes
@@ -238,7 +240,7 @@
   become_user: "{{ user }}"
   shell: |
     microk8s.enable dns
-    microk8s.kubectl config view --raw > ~/.kube/microk8s
+    microk8s.kubectl config view --raw > {{ home }}/.kube/microk8s
     echo OK > {{ home }}/.var/microk8s.done
   args:
     executable: /usr/bin/bash
