@@ -169,7 +169,34 @@
     fisher add evanlucas/fish-kubectl-completions
     set -e FZF_COMPLETE
     echo OK > {{ home }}/.var/fish.done
-    exit 0
   args:
     executable: /usr/bin/fish
     creates: "{{ home }}/.var/fish.done"
+
+- name: Install sdkman
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+    export SDKMAN_DIR="{{ home }}/opt/sdkman"
+    curl -s "https://get.sdkman.io" | bash
+    source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
+  args:
+    executable: /usr/bin/bash
+    creates: "{{ home }}/opt/sdkman"
+
+- name: Install sdkman packages
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+    export SDKMAN_DIR="{{ home }}/opt/sdkman"
+    source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
+    sdk install {{ item }}
+  args:
+    executable: /usr/bin/bash
+    creates: "{{ home }}/opt/sdkman/candidates/{{ item }}"
+  with_items:
+    - java
+    - maven
+    - groovy
+    - gradle
+    - visualvm
