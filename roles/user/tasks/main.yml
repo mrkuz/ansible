@@ -29,3 +29,23 @@
     - "{{ home }}/tmp"
     - "{{ home }}/Videos"
     - "{{ home }}/Workspace"
+
+- name: "Clone repositories"
+  become: yes
+  become_user: "{{ user }}"
+  git:
+    repo: "https://github.com/{{ item.repo }}"
+    dest: "{{ home }}/{{ item.dest }}"
+  with_items:
+    - repo: abhigenie92/unattended_upgrades_repos
+      dest: src/unattended_upgrades_repos
+    - repo: TylerBrock/mongo-hacker
+      dest: src/mongo-hacker
+    - repo: hlissner/doom-emacs
+      dest: .emacs.d
+    - repo: mrkuz/dockerfiles
+      dest: src/dockerfiles
+    - repo: mrkuz/doom.d
+      dest: etc/doom.d
+    - repo: mrkuz/dotfiles
+      dest: etc/dotfiles.git
