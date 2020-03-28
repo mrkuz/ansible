@@ -200,3 +200,35 @@
     - groovy
     - gradle
     - visualvm
+
+- name: Get user id
+  become: yes
+  become_user: "{{ user }}"
+  command: id -u
+  register: uid
+
+- name: Get group id
+  become: yes
+  become_user: "{{ user }}"
+  command: id -g
+  register: gid
+
+- name: Build docker images
+  become: yes
+  become_user: "{{ user }}"
+  docker_image:
+    build:
+      pull: no
+      path: "{{ home }}/src/dockerfiles/{{ item }}"
+      args:
+        USER: "{{ user }}"
+        USER_ID: "{{ uid.stdout }}"
+        GROUP: "{{ user  }}"
+        GROUP_ID: "{{ gid.stdout }}"
+    name: mrkuz/{{ item }}
+    source: build
+  with_items:
+    - ubuntu-base
+    - firefox
+    - inkscape
+    - libreoffice
