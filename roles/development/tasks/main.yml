@@ -24,3 +24,26 @@
     classic: true
     channel: 13/stable
     name: node
+
+- name: Install postman
+  become: yes
+  flatpak:
+    name: com.getpostman.Postman
+
+- name: Install mitmproxy
+  become: yes
+  pip:
+    executable: pip3
+    name: mitmproxy
+
+- name: Install frida-tools
+  become: yes
+  pip:
+    executable: pip3
+    name: frida-tools
+
+- name: Install gulp
+  become: yes
+  npm:
+    name: gulp
+    global: yes
