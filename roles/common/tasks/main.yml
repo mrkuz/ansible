@@ -1,0 +1,50 @@
+---
+- name: Install CLI tools
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - adb
+      - build-essential
+      - gocr
+      - htop
+      - imagemagick
+      - mkvtoolnix
+      - nmap
+      - tidy
+
+- name: Install X tools
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - weston
+      - xclip
+      - xserver-xephyr
+      - xwayland
+
+- name: Install GUI tools
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - baobab
+      - gparted
+      - simple-scan
+
+- name: Install virtualization packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - virtualbox
+      - qemu-kvm
+  notify:
+    - Assign KVM group
+
+- name: Install snaps
+  become: yes
+  snap:
+    classic: true
+    name:
+      - pdftk

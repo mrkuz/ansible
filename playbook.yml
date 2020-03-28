@@ -6,6 +6,7 @@
     - ubuntu-desktop
     - gnome
     - essentials
+    - common
     - mail
     - emacs
     - user
