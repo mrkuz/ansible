@@ -2,6 +2,7 @@
 - name: Set up base
   hosts: all
   roles:
+    - base
     - ubuntu-desktop
     - gnome
     - user

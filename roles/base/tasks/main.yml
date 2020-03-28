@@ -1,0 +1,14 @@
+---
+- name: Install flatpak
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - flatpak
+      - gnome-software-plugin-flatpak
+
+- name: Set up flatpak
+  become: yes
+  flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
