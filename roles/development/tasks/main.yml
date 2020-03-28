@@ -14,8 +14,7 @@
 - name: Install snaps
   become: yes
   snap:
-    name:
-      - robo3t-snap
+    name: robo3t-snap
 
 - name: Install node
   become: yes
@@ -35,8 +34,7 @@
   become: yes
   pip:
     executable: pip3
-    name:
-      - mitmproxy
+    name: mitmproxy
 
 - name: Install NPM packages
   become: yes

@@ -9,7 +9,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - graphviz
       - librsvg2-bin
       - pandoc
@@ -20,5 +20,4 @@
 - name: Install snap dependencies
   become: yes
   snap:
-    name:
-      - hugo
+    name: hugo

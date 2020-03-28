@@ -3,5 +3,4 @@
   become: yes
   pip:
     executable: pip3
-    name:
-      - frida-tools
+    name: frida-tools

@@ -3,7 +3,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - fish
       - fzf
       - git
@@ -17,8 +17,7 @@
   become: yes
   snap:
     classic: true
-    name:
-      - syncthing
+    name: syncthing
 
 - name: Install PIP packages
   become: yes

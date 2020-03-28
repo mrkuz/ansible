@@ -15,7 +15,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - adb
       - build-essential
       - gocr
@@ -29,7 +29,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - weston
       - xclip
       - xserver-xephyr
@@ -39,7 +39,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - baobab
       - google-chrome-stable
       - gparted
@@ -48,7 +48,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - virtualbox
       - qemu-kvm
   notify:
@@ -58,8 +58,7 @@
   become: yes
   snap:
     classic: true
-    name:
-      - pdftk
+    name: pdftk
 
 - name: Install flatpaks
   become: yes

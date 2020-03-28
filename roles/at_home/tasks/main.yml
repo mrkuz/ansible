@@ -3,7 +3,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - simple-scan
       - thunderbird
 
@@ -11,8 +11,7 @@
   become: yes
   snap:
     classic: true
-    name:
-      - filebot
+    name: filebot
 
 - name: Install flatpaks
   become: yes

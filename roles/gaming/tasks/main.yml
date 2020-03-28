@@ -8,7 +8,7 @@
   become: yes
   apt:
     update_cache: yes
-    name:
+    names:
       - lutris
       - steam
       - steam-devices
