@@ -22,3 +22,11 @@
       - docker-compose
   notify:
     - Assign docker group
+
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - git
+      - gitk

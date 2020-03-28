@@ -5,4 +5,7 @@
     - base
     - ubuntu-desktop
     - gnome
+    - essentials
+    - mail
+    - emacs
     - user
