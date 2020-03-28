@@ -20,16 +20,3 @@
   apt:
     autoremove: yes
     autoclean: yes
-
-- name: Add user
-  become: yes
-  user:
-    name: "{{ user }}"
-    comment: "{{ fullName }}"
-    shell: /bin/bash
-    groups: adm,cdrom,dip,lpadmin,lxd,plugdev,sudo
-    append: yes
-
-- name: Reset password
-  become: yes
-  command: passwd -d "{{ user }}"

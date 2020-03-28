@@ -4,3 +4,4 @@ all:
     vbox:
       ansible_host: 192.168.56.102
       ansible_user: user
+      ansible_become_password: user

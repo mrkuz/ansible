@@ -10,9 +10,3 @@
       - gnome-shell-pomodoro
       - nautilus
       - chrome-gnome-shell
-
-- name: Clean up
-  become: yes
-  apt:
-    autoremove: yes
-    autoclean: yes
