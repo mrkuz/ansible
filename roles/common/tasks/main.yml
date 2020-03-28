@@ -30,7 +30,6 @@
     name:
       - baobab
       - gparted
-      - simple-scan
 
 - name: Install virtualization packages
   become: yes
@@ -48,3 +47,13 @@
     classic: true
     name:
       - pdftk
+
+- name: Install flatpaks
+  become: yes
+  flatpak:
+    name: "{{ item }}"
+  with_items:
+    - com.skype.Client
+    - com.spotify.Client
+    - org.gimp.GIMP
+    - org.videolan.VLC

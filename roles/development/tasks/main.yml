@@ -15,7 +15,6 @@
   become: yes
   snap:
     name:
-      - hugo
       - robo3t-snap
 
 - name: Install node
@@ -28,19 +27,21 @@
 - name: Install flatpaks
   become: yes
   flatpak:
-    name: com.getpostman.Postman
+    name: "{{ item }}"
+  with_items:
+    - com.getpostman.Postman
 
-- name: Install pip packages
+- name: Install PIP packages
   become: yes
   pip:
     executable: pip3
-    name: "{{ item }}"
-  with_items:
-    - mitmproxy
-    - frida-tools
+    name:
+      - mitmproxy
 
-- name: Install npm packages
+- name: Install NPM packages
   become: yes
   npm:
-    name: gulp
+    name: "{{ item }}"
     global: yes
+  with_items:
+    - gulp

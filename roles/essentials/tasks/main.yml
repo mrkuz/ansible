@@ -6,6 +6,8 @@
     name:
       - fish
       - fzf
+      - git
+      - gitk
       - rclone
       - ripgrep
       - rsync
@@ -17,3 +19,11 @@
     classic: true
     name:
       - syncthing
+
+- name: Install PIP packages
+  become: yes
+  pip:
+    executable: pip3
+    name:
+      - ansible
+      - ansible-lint
