@@ -12,3 +12,13 @@
   flatpak_remote:
     name: flathub
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install docker
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - docker.io
+      - docker-compose
+  notify:
+    - Assign docker group

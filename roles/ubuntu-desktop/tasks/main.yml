@@ -5,6 +5,8 @@
     update_cache: yes
     name:
       - ubuntu-desktop-minimal
+      - ubuntu-artwork
+      - ubuntu-restricted-extras
 
 - name: Remove unused packages
   become: yes
