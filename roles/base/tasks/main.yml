@@ -69,3 +69,38 @@
       - tuptime
       - unrar
       - uuid
+
+- name: Configure nsswitch.conf
+  become: yes
+  lineinfile:
+    path: /etc/nsswitch.conf
+    regex: "^hosts:"
+    line: "hosts:          files resolve [!UNAVAIL=return] dns mdns4_minimal [NOTFOUND=return]"
+
+- name: Configure grub
+  become: yes
+  block:
+    - name: Set grub timeout style
+      lineinfile:
+        path: /etc/default/grub
+        regex: "^GRUB_TIMEOUT_STYLE="
+        line: "GRUB_TIMEOUT_STYLE="
+    - name: Set grub timeout
+      lineinfile:
+        path: /etc/default/grub
+        regex: "^GRUB_TIMEOUT="
+        line: "GRUB_TIMEOUT=5"
+    - name: Set grub recordfail timeout"
+      lineinfile:
+        path: /etc/default/grub
+        regex: "^GRUB_RECORDFAIL_TIMEOUT=5"
+        line: "GRUB_RECORDFAIL_TIMEOUT=5"
+
+- name: Configure unattended upgrades
+  become: yes
+  copy:
+    src: 50unattended-upgrades
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    owner: root
+    group: root
+    mode: 0644
