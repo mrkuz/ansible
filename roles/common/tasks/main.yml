@@ -15,7 +15,7 @@
   become: yes
   apt:
     update_cache: yes
-    names:
+    name:
       - adb
       - build-essential
       - gocr
@@ -29,7 +29,7 @@
   become: yes
   apt:
     update_cache: yes
-    names:
+    name:
       - weston
       - xclip
       - xserver-xephyr
@@ -39,7 +39,7 @@
   become: yes
   apt:
     update_cache: yes
-    names:
+    name:
       - baobab
       - google-chrome-stable
       - gparted
@@ -48,7 +48,7 @@
   become: yes
   apt:
     update_cache: yes
-    names:
+    name:
       - virtualbox
       - qemu-kvm
   notify:

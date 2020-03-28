@@ -1,0 +1,4 @@
+---
+- name: Assign microk8s group
+  become: yes
+  command: adduser "{{ user }}" microk8s

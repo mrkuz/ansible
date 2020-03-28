@@ -3,7 +3,7 @@
   become: yes
   apt:
     update_cache: yes
-    names:
+    name:
       - ubuntu-desktop-minimal
       - ubuntu-artwork
       - ubuntu-restricted-extras
@@ -12,7 +12,7 @@
   become: yes
   apt:
     update_cache: yes
-    names:
+    name:
       - libgconf-2-4
       - libcanberra-gtk-module
       - libcanberra-gtk3-module
@@ -22,7 +22,7 @@
   apt:
     state: absent
     purge: yes
-    names:
+    name:
       - byobu
       - firefox
 

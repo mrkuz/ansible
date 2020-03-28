@@ -232,3 +232,14 @@
     - firefox
     - inkscape
     - libreoffice
+
+- name: Set up microk8s
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+    microk8s.enable dns
+    microk8s.kubectl config view --raw > ~/.kube/microk8s
+    echo OK > {{ home }}/.var/microk8s.done
+  args:
+    executable: /usr/bin/bash
+    creates: "{{ home }}/.var/microk8s.done"

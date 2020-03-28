@@ -9,7 +9,9 @@
     - common
     - emacs
     - development
+    - kubernetes
     - mesa
+    - nvidia
     - gaming
     - at_home
     - at_work
