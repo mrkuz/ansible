@@ -60,16 +60,10 @@
       dest: src/unattended_upgrades_repos
     - repo: TylerBrock/mongo-hacker
       dest: src/mongo-hacker
-    - repo: hakimel/reveal.js
-      dest: opt/reveal.js
-    - repo: hlissner/doom-emacs
-      dest: .emacs.d
     - repo: mrkuz/ansible
       dest: etc/ansible
     - repo: mrkuz/dockerfiles
       dest: src/dockerfiles
-    - repo: mrkuz/doom.d
-      dest: etc/doom.d
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
 
@@ -120,25 +114,6 @@
   lineinfile:
     path: "{{ home }}/.bashrc"
     line: . ~/.bashrc.local
-
-- name: Set up doom
-  become: yes
-  become_user: "{{ user }}"
-  block:
-    - name: "Link doom direcotry"
-      file:
-        src: "{{ home }}/etc/doom.d"
-        dest: "{{ home }}/.doom.d"
-        state: link
-    - name: "Link doom binary"
-      file:
-        src: "{{ home }}/.emacs.d/bin/doom"
-        dest: "{{ home }}/bin/doom"
-        state: link
-    - name: Initialize doom
-      command: "{{ home }}/bin/doom sync"
-      args:
-        creates: "{{ home }}/.doom.d/config.el"
 
 - name: Install mongo-hacker
   become: yes

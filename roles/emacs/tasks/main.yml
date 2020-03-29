@@ -21,3 +21,37 @@
   become: yes
   snap:
     name: hugo
+
+- name: "Clone repositories"
+  become: yes
+  become_user: "{{ user }}"
+  git:
+    repo: "https://github.com/{{ item.repo }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    update: no
+  with_items:
+    - repo: hakimel/reveal.js
+      dest: opt/reveal.js
+    - repo: hlissner/doom-emacs
+      dest: .emacs.d
+    - repo: mrkuz/doom.d
+      dest: etc/doom.d
+
+- name: Set up doom
+  become: yes
+  become_user: "{{ user }}"
+  block:
+    - name: "Link doom direcotry"
+      file:
+        src: "{{ home }}/etc/doom.d"
+        dest: "{{ home }}/.doom.d"
+        state: link
+    - name: "Link doom binary"
+      file:
+        src: "{{ home }}/.emacs.d/bin/doom"
+        dest: "{{ home }}/bin/doom"
+        state: link
+    - name: Initialize doom
+      command: "{{ home }}/bin/doom sync"
+      args:
+        creates: "{{ home }}/.doom.d/config.el"
