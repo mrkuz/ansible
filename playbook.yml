@@ -1,6 +1,8 @@
 ---
 - name: Set up base
   hosts: all
+  # hosts: localhost
+  # connection: local
   roles:
     - base
     - ubuntu-desktop
@@ -9,10 +11,10 @@
     - common
     - emacs
     - development
-    - kubernetes
-    - mesa
+    # - kubernetes
+    # - mesa
     - nvidia
     - gaming
     - at_home
-    - at_work
+    # - at_work
     - user

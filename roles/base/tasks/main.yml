@@ -1,21 +1,4 @@
 ---
-- name: Add user
-  become: yes
-  user:
-    name: "{{ user }}"
-    comment: "{{ fullName }}"
-    shell: /bin/bash
-    groups:
-      - adm
-      - cdrom
-      - dip
-      - lpadmin
-      - lxd
-      - plugdev
-      - sudo
-    append: yes
-  notify: Reset password
-
 - name: Enable i386
   become: yes
   command: dpkg --add-architecture i386
@@ -43,8 +26,6 @@
     name:
       - docker.io
       - docker-compose
-  notify:
-    - Assign docker group
 
 - name: Install python
   become: yes
@@ -64,6 +45,7 @@
       - bridge-utils
       - cifs-utils
       - cgroup-tools
+      - cups
       - curl
       - dos2unix
       - lm-sensors
@@ -111,3 +93,46 @@
     owner: root
     group: root
     mode: "0644"
+
+- name: Add user
+  become: yes
+  user:
+    name: "{{ user }}"
+    comment: "{{ fullName }}"
+    shell: /bin/bash
+    groups:
+      - adm
+      - cdrom
+      - dip
+      - docker
+      - lpadmin
+      - lxd
+      - plugdev
+      - sudo
+    append: yes
+  notify: Reset password
+
+- name: Create data directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - /data
+    - /data/docker-home
+    - /data/docker-home-overlay
+
+- name: Create user data directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+  with_items:
+    - "/data/docker-home/{{ user }}"
+
+- name: Flush handlers
+  meta: flush_handlers

@@ -10,3 +10,17 @@
       - kubectl
       - microk8s
   notify: Assign microk8s group
+
+- name: Set up microk8s
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+    microk8s.enable dns
+    microk8s.kubectl config view --raw > {{ home }}/.kube/microk8s
+    echo OK > {{ home }}/.var/microk8s.done
+  args:
+    executable: /usr/bin/bash
+    creates: "{{ home }}/.var/microk8s.done"
+
+- name: Flush handlers
+  meta: flush_handlers

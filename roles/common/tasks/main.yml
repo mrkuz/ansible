@@ -69,3 +69,6 @@
     - com.spotify.Client
     - org.gimp.GIMP
     - org.videolan.VLC
+
+- name: Flush handlers
+  meta: flush_handlers

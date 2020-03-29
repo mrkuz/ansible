@@ -5,7 +5,7 @@
   file:
     path: "{{ item }}"
     state: directory
-    mode: 0775
+    mode: 0755
   with_items:
     - "{{ home }}/Backup"
     - "{{ home }}/bin"
@@ -54,6 +54,7 @@
   git:
     repo: "https://github.com/{{ item.repo }}"
     dest: "{{ home }}/{{ item.dest }}"
+    update: no
   with_items:
     - repo: abhigenie92/unattended_upgrades_repos
       dest: src/unattended_upgrades_repos
@@ -63,6 +64,8 @@
       dest: opt/reveal.js
     - repo: hlissner/doom-emacs
       dest: .emacs.d
+    - repo: mrkuz/ansible
+      dest: etc/ansible
     - repo: mrkuz/dockerfiles
       dest: src/dockerfiles
     - repo: mrkuz/doom.d
@@ -235,13 +238,3 @@
     - inkscape
     - libreoffice
 
-- name: Set up microk8s
-  become: yes
-  become_user: "{{ user }}"
-  shell: |
-    microk8s.enable dns
-    microk8s.kubectl config view --raw > {{ home }}/.kube/microk8s
-    echo OK > {{ home }}/.var/microk8s.done
-  args:
-    executable: /usr/bin/bash
-    creates: "{{ home }}/.var/microk8s.done"
