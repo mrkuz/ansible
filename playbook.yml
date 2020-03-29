@@ -1,20 +1,23 @@
 ---
-- name: Set up base
+- name: Bootrap system
   hosts: all
   # hosts: localhost
   # connection: local
   roles:
+    # - filesystem
     - base
+    - docker
     - ubuntu-desktop
     - gnome
     - essentials
-    - common
+    - fish
     - emacs
-    - development
+    # - common
+    # - at_home
+    # - at_work
+    # - development
     # - kubernetes
     # - mesa
-    - nvidia
-    - gaming
-    - at_home
-    # - at_work
+    # - nvidia
+    # - gaming
     - user

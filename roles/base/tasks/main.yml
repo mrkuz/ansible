@@ -5,6 +5,13 @@
   args:
     creates: /var/lib/dpkg/arch
 
+- name: Enable Canonical partners repository
+  become: yes
+  lineinfile:
+    path: /etc/apt/sources.list
+    regex: "^# deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner"
+    line: "deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner"
+
 - name: Install flatpak
   become: yes
   apt:
@@ -27,6 +34,7 @@
       - python
       - python3
       - python3-pip
+      - python3-psutil
       - python3-pyqt5
 
 - name: Install packages
@@ -57,6 +65,13 @@
     path: /etc/nsswitch.conf
     regex: "^hosts:"
     line: "hosts:          files resolve [!UNAVAIL=return] dns mdns4_minimal [NOTFOUND=return]"
+
+- name: Disable apport
+  become: yes
+  lineinfile:
+    path: /etc/default/apport
+    regex: "^enabled="
+    line: "enabled=0"
 
 - name: Configure grub
   become: yes
