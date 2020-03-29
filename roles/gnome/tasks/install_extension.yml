@@ -1,0 +1,35 @@
+---
+- name: "Check status - {{ info.name }}"
+  become: true
+  become_user: "{{ user }}"
+  stat:
+    path: "{{ home }}/.local/share/gnome-shell/extensions/{{ info.uuid }}"
+  register: installed
+
+- name: Install extension
+  become: true
+  become_user: "{{ user }}"
+  block:
+    - name: "Create directory - {{ info.name }}"
+      file:
+        state: directory
+        path: "{{ home }}/.local/share/gnome-shell/extensions/{{ info.uuid }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0755"
+    - name: "Download ZIP - {{ info.name }}"
+      get_url:
+        url: "https://extensions.gnome.org{{ info.download_url }}"
+        dest: "{{ home }}/.local/share/gnome-shell/extensions/{{ info.uuid }}.zip"
+    - name: "Extract ZIP - {{ info.name }}"
+      unarchive:
+        src: "{{ home }}/.local/share/gnome-shell/extensions/{{ info.uuid }}.zip"
+        dest: "{{ home }}/.local/share/gnome-shell/extensions/{{ info.uuid }}"
+        remote_src: yes
+    - name: "Enable extension - {{ info.name }}"
+      command: "gnome-shell-extension-tool --enable-extension {{ info.uuid }}"
+    - name: "Clean up - {{ info.name }}"
+      file:
+        state: absent
+        path: "{{ home }}/.local/share/gnome-shell/extensions/{{ info.uuid }}.zip"
+  when: installed.stat.exists == false
