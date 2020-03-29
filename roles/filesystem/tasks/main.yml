@@ -2,7 +2,7 @@
 - name: Create a logical volumes
   become: true
   lvol:
-    vg: "{{ volumeGroup}}"
+    vg: "{{ volume_group}}"
     lv: "{{ item.name }}"
     size: "{{ item.size }}"
   with_items:
@@ -17,7 +17,7 @@
   become: true
   filesystem:
     fstype: "{{ item.type }}"
-    dev: "/dev/{{ volumeGroup }}/{{ item.name }}"
+    dev: "/dev/{{ volume_group }}/{{ item.name }}"
   with_items:
     - { name: home, type: ext4 }
     - { name: snap, type: ext4 }
@@ -30,21 +30,26 @@
   become: true
   mount:
     path: "{{ item.target }}"
-    src: "/dev/{{ volumeGroup }}/{{ item.name }}"
+    src: "/dev/{{ volume_group }}/{{ item.name }}"
     fstype: "{{ item.type }}"
     passno: "{{ item.pass }}"
     state: mounted
   with_items:
-    - { name: snap, type: ext4, target : /var/lib/snapd, pass: 2 }
-    - { name: flatpak, type: ext4, target : /var/lib/flatpak, pass: 2 }
-    - { name: docker, type: ext4, target : /var/lib/docker, pass: 2 }
-    - { name: docker-home-overlay, type: ext4, target : /data/docker-home-overlay, pass: 2 }
+    - { name: snap, type: ext4, target: /var/lib/snapd, pass: 2 }
+    - { name: flatpak, type: ext4, target: /var/lib/flatpak, pass: 2 }
+    - { name: docker, type: ext4, target: /var/lib/docker, pass: 2 }
+    - {
+        name: docker-home-overlay,
+        type: ext4,
+        target: /data/docker-home-overlay,
+        pass: 2,
+      }
 
 - name: Mount home
   become: true
   mount:
     path: /home
-    src: "/dev/{{ volumeGroup }}/home"
+    src: "/dev/{{ volume_group }}/home"
     fstype: ext4
     passno: "2"
     state: present
@@ -53,8 +58,8 @@
   become: yes
   lineinfile:
     path: /etc/fstab
-    regex: "^/dev/{{ volumeGroup }}/swap"
-    line: "/dev/{{ volumeGroup }}/swap none swap sw 0 0"
+    regex: "^/dev/{{ volume_group }}/swap"
+    line: "/dev/{{ volume_group }}/swap none swap sw 0 0"
   notify: Activate swap
 
 - name: Mount AUFS

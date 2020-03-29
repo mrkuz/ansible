@@ -13,13 +13,14 @@
 
 - name: Get gnome shell version
   shell: gnome-shell --version | sed 's/GNOME Shell //'
-  register: gnomeShellVersion
+  register: r_gnome_shell_version
   changed_when: no
 
-- name: Get extension infos
-  uri:
-    url: "https://extensions.gnome.org/extension-info/?pk={{ item }}&shell_version={{ gnomeShellVersion.stdout }}"
-    return_content: yes
+- name: Install extensions
+  include_tasks: install_extension.yml
+  vars:
+    gnome_shell_version: "{{ r_gnome_shell_version.stdout }}"
+    extension_id: "{{ item }}"
   with_items:
     - 307 # Dash to dock
     - 448 # Remove rounded corners
@@ -29,10 +30,3 @@
     - 973 # Switcher
     - 19 # User themes
     - 1683 # Draw on your screen
-  register: gnomeExtensionInfos
-
-- name: Install extensions
-  include_tasks: install_extension.yml
-  vars:
-    info: "{{ item.json }}"
-  loop: "{{ gnomeExtensionInfos.results }}"
