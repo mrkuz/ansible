@@ -93,6 +93,7 @@
     - .config/fish/functions/todo.fish
     - .config/fish/functions/x11d.fish
     - .eclipse-java-style.xml
+    - .gitconfig
     - .gradle/gradle.properties
     - .inputrc
     - .tmux.conf
@@ -237,4 +238,3 @@
     - firefox
     - inkscape
     - libreoffice
-
