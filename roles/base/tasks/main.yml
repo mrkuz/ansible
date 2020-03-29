@@ -19,14 +19,6 @@
     name: flathub
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
 
-- name: Install docker
-  become: yes
-  apt:
-    update_cache: yes
-    name:
-      - docker.io
-      - docker-compose
-
 - name: Install python
   become: yes
   apt:
@@ -100,39 +92,22 @@
     name: "{{ user }}"
     comment: "{{ fullName }}"
     shell: /bin/bash
+    append: yes
+  notify: Reset password
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Set up user groups
+  become: yes
+  user:
+    name: "{{ user }}"
     groups:
       - adm
       - cdrom
       - dip
-      - docker
       - lpadmin
       - lxd
       - plugdev
       - sudo
     append: yes
-  notify: Reset password
-
-- name: Create data directories
-  become: yes
-  file:
-    path: "{{ item }}"
-    state: directory
-    mode: 0755
-  with_items:
-    - /data
-    - /data/docker-home
-    - /data/docker-home-overlay
-
-- name: Create user data directories
-  become: yes
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0755
-  with_items:
-    - "/data/docker-home/{{ user }}"
-
-- name: Flush handlers
-  meta: flush_handlers

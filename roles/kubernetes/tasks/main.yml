@@ -11,6 +11,9 @@
       - microk8s
   notify: Assign microk8s group
 
+- name: Flush handlers
+  meta: flush_handlers
+
 - name: Set up microk8s
   become: yes
   become_user: "{{ user }}"
@@ -21,6 +24,3 @@
   args:
     executable: /usr/bin/bash
     creates: "{{ home }}/.var/microk8s.done"
-
-- name: Flush handlers
-  meta: flush_handlers

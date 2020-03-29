@@ -36,8 +36,6 @@
     - "{{ home }}/.ansible/tmp"
     - "{{ home }}/.config/Code"
     - "{{ home }}/.config/Code/User"
-    - "{{ home }}/.config/fish"
-    - "{{ home }}/.config/fish/functions/"
     - "{{ home }}/.vscode/DevOps"
     - "{{ home }}/.vscode/DevOps/extensions"
     - "{{ home }}/.vscode/DevOps/User"
@@ -62,8 +60,6 @@
       dest: src/mongo-hacker
     - repo: mrkuz/ansible
       dest: etc/ansible
-    - repo: mrkuz/dockerfiles
-      dest: src/dockerfiles
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
 
@@ -75,17 +71,9 @@
     dest: "{{ home }}/{{ item }}"
     state: link
   with_items:
-    - bin/fsh
     - .bashrc.local
     - .config/Code/User/keybindings.json
     - .config/Code/User/settings.json
-    - .config/fish/config.fish
-    - .config/fish/fish_variables
-    - .config/fish/functions/fish_prompt.fish
-    - .config/fish/functions/note.fish
-    - .config/fish/functions/scratch.fish
-    - .config/fish/functions/todo.fish
-    - .config/fish/functions/x11d.fish
     - .eclipse-java-style.xml
     - .gitconfig
     - .gradle/gradle.properties
@@ -123,35 +111,6 @@
     chdir: "{{ home }}/src/mongo-hacker"
     creates: "{{ home }}/.mongorc.js"
 
-- name: Install plantuml
-  become: yes
-  become_user: "{{ user }}"
-  get_url:
-    url: https://downloads.sourceforge.net/project/plantuml/plantuml.jar
-    dest: "{{ home}}/opt/plantuml/planuml.jar"
-    mode: 0744
-
-- name: Install fisher
-  become: yes
-  become_user: "{{ user }}"
-  get_url:
-    url: https://github.com/jorgebucaran/fisher/blob/master/fisher.fish
-    dest: "{{ home}}/.config/fish/functions/fisher.fish"
-    mode: 0744
-
-- name: Set up fish
-  become: yes
-  become_user: "{{ user }}"
-  shell: |
-    set -U fish_greeting
-    fisher add jethrokuan/fzf
-    fisher add evanlucas/fish-kubectl-completions
-    set -e FZF_COMPLETE
-    echo OK > {{ home }}/.var/fish.done
-  args:
-    executable: /usr/bin/fish
-    creates: "{{ home }}/.var/fish.done"
-
 - name: Install sdkman
   become: yes
   become_user: "{{ user }}"
@@ -179,37 +138,3 @@
     - groovy
     - gradle
     - visualvm
-
-- name: Get user id
-  become: yes
-  become_user: "{{ user }}"
-  command: id -u
-  register: uid
-  changed_when: no
-
-- name: Get group id
-  become: yes
-  become_user: "{{ user }}"
-  command: id -g
-  register: gid
-  changed_when: no
-
-- name: Build docker images
-  become: yes
-  become_user: "{{ user }}"
-  docker_image:
-    build:
-      pull: no
-      path: "{{ home }}/src/dockerfiles/{{ item }}"
-      args:
-        USER: "{{ user }}"
-        USER_ID: "{{ uid.stdout }}"
-        GROUP: "{{ user  }}"
-        GROUP_ID: "{{ gid.stdout }}"
-    name: mrkuz/{{ item }}
-    source: build
-  with_items:
-    - ubuntu-base
-    - firefox
-    - inkscape
-    - libreoffice

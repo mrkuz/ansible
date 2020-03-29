@@ -22,6 +22,24 @@
   snap:
     name: hugo
 
+# - name: Install plantuml
+#   become: yes
+#   become_user: "{{ user }}"
+#   get_url:
+#     url: https://downloads.sourceforge.net/project/plantuml/plantuml.jar
+#     dest: "{{ home}}/opt/plantuml/planuml.jar"
+#     mode: 0744
+
+- name: Create directories
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ home }}/bin"
+
 - name: "Clone repositories"
   become: yes
   become_user: "{{ user }}"

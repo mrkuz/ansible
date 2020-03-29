@@ -1,0 +1,79 @@
+---
+- name: Install docker
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - docker.io
+      - docker-compose
+  notify: Assign docker group
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Create data directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - /data
+    - /data/docker-home
+    - /data/docker-home-overlay
+
+- name: Create user data directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+  with_items:
+    - "/data/docker-home/{{ user }}"
+
+- name: "Clone repositories"
+  become: yes
+  become_user: "{{ user }}"
+  git:
+    repo: "https://github.com/{{ item.repo }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    update: no
+  with_items:
+    - repo: mrkuz/dockerfiles
+      dest: src/dockerfiles
+
+- name: Get user id
+  become: yes
+  become_user: "{{ user }}"
+  command: id -u
+  register: uid
+  changed_when: no
+
+- name: Get group id
+  become: yes
+  become_user: "{{ user }}"
+  command: id -g
+  register: gid
+  changed_when: no
+
+- name: Build docker images
+  become: yes
+  become_user: "{{ user }}"
+  docker_image:
+    build:
+      pull: no
+      path: "{{ home }}/src/dockerfiles/{{ item }}"
+      args:
+        USER: "{{ user }}"
+        USER_ID: "{{ uid.stdout }}"
+        GROUP: "{{ user  }}"
+        GROUP_ID: "{{ gid.stdout }}"
+    name: mrkuz/{{ item }}
+    source: build
+  with_items:
+    - ubuntu-base
+    - firefox
+    - inkscape
+    - libreoffice

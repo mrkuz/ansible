@@ -4,8 +4,6 @@
   apt:
     update_cache: yes
     name:
-      - fish
-      - fzf
       - git
       - gitk
       - rclone
