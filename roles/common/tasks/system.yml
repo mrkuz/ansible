@@ -1,16 +1,4 @@
 ---
-- name: Add repository keys
-  become: yes
-  apt_key:
-    id: A040830F7FAC5991
-    url: https://dl-ssl.google.com/linux/linux_signing_key.pub
-
-- name: Add repositories
-  become: yes
-  apt_repository:
-    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-    filename: google-chrome
-
 - name: Install CLI tools
   become: yes
   apt:
@@ -41,7 +29,6 @@
     update_cache: yes
     name:
       - baobab
-      - google-chrome-stable
       - gparted
 
 - name: Install virtualization packages

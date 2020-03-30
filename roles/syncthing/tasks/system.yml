@@ -1,0 +1,6 @@
+---
+- name: Install syncthing
+  become: yes
+  snap:
+    classic: true
+    name: syncthing

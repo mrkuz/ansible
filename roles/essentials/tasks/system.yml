@@ -11,12 +11,6 @@
       - rsync
       - tmux
 
-- name: Install snaps
-  become: yes
-  snap:
-    classic: true
-    name: syncthing
-
 - name: Install PIP packages
   become: yes
   pip:

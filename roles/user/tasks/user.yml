@@ -34,17 +34,6 @@
     - "{{ home }}/.var"
     - "{{ home }}/.ansible"
     - "{{ home }}/.ansible/tmp"
-    - "{{ home }}/.config/Code"
-    - "{{ home }}/.config/Code/User"
-    - "{{ home }}/.vscode/DevOps"
-    - "{{ home }}/.vscode/DevOps/extensions"
-    - "{{ home }}/.vscode/DevOps/User"
-    - "{{ home }}/.vscode/Java"
-    - "{{ home }}/.vscode/Java/extensions"
-    - "{{ home }}/.vscode/Java/User"
-    - "{{ home }}/.vscode/JavaScript"
-    - "{{ home }}/.vscode/JavaScript/extensions"
-    - "{{ home }}/.vscode/JavaScript/User"
 
 - name: "Clone repositories"
   become: yes
@@ -72,29 +61,12 @@
     state: link
   with_items:
     - .bashrc.local
-    - .config/Code/User/keybindings.json
-    - .config/Code/User/settings.json
     - .eclipse-java-style.xml
     - .gitconfig
     - .gradle/gradle.properties
     - .inputrc
     - .tmux.conf
     - .shortcuts.json
-
-- name: Set up vscode profiles
-  become: yes
-  become_user: "{{ user }}"
-  file:
-    src: "{{ home }}/etc/dotfiles.git/.config/Code/User/{{ item.file }}"
-    dest: "{{ home }}/.vscode/{{ item.profile }}/User/{{ item.file }}"
-    state: link
-  with_items:
-    - { profile: DevOps, file: settings.json }
-    - { profile: DevOps, file: keybindings.json }
-    - { profile: Java, file: settings.json }
-    - { profile: Java, file: keybindings.json }
-    - { profile: JavaScript, file: settings.json }
-    - { profile: JavaScript, file: keybindings.json }
 
 - name: Configure bash
   become: yes
@@ -110,31 +82,3 @@
   args:
     chdir: "{{ home }}/src/mongo-hacker"
     creates: "{{ home }}/.mongorc.js"
-
-- name: Install sdkman
-  become: yes
-  become_user: "{{ user }}"
-  shell: |
-    export SDKMAN_DIR="{{ home }}/opt/sdkman"
-    curl -s "https://get.sdkman.io" | bash
-    source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
-  args:
-    executable: /usr/bin/bash
-    creates: "{{ home }}/opt/sdkman"
-
-- name: Install sdkman packages
-  become: yes
-  become_user: "{{ user }}"
-  shell: |
-    export SDKMAN_DIR="{{ home }}/opt/sdkman"
-    source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
-    sdk install {{ item }}
-  args:
-    executable: /usr/bin/bash
-    creates: "{{ home }}/opt/sdkman/candidates/{{ item }}"
-  with_items:
-    - java
-    - maven
-    - groovy
-    - gradle
-    - visualvm
