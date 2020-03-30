@@ -21,8 +21,8 @@
         - "{{ home }}/.var"
     - name: Set up microk8s
       shell: |
-        microk8s.enable dns &
-        microk8s.kubectl config view --raw > {{ home }}/.kube/microk8s
+        microk8s enable dns &
+        microk8s kubectl config view --raw > {{ home }}/.kube/microk8s
         echo OK > {{ home }}/.var/microk8s.done
       args:
         executable: /usr/bin/bash

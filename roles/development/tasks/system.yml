@@ -6,7 +6,6 @@
     name:
       - android-studio
       - intellij-idea-community
-      - code
       - go
       - netbeans
       - protobuf
