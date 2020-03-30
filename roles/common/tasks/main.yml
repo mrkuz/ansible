@@ -51,11 +51,14 @@
     name:
       - virtualbox
       - qemu-kvm
-  notify:
-    - Assign KVM group
 
-- name: Flush handlers
-  meta: flush_handlers
+- name: Assign KVM group
+  become: yes
+  user:
+    name: "{{ user }}"
+    groups:
+      - kvm
+    append: yes
 
 - name: Install snaps
   become: yes

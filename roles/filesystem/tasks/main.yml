@@ -60,7 +60,12 @@
     path: /etc/fstab
     regex: "^/dev/{{ volume_group }}/swap"
     line: "/dev/{{ volume_group }}/swap none swap sw 0 0"
-  notify: Activate swap
+  register: r_mount_swap
+
+- name: Activate swap
+  become: yes
+  command: swapon "/dev/{{ volume_group }}/swap"
+  when: r_mount_swap.changed
 
 - name: Mount AUFS
   become: true

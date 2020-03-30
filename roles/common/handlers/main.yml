@@ -1,4 +1,0 @@
----
-- name: Assign KVM group
-  become: yes
-  command: adduser "{{ user }}" kvm

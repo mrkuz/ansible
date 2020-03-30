@@ -1,4 +1,0 @@
----
-- name: Assign docker group
-  become: yes
-  command: adduser "{{ user }}" docker

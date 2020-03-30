@@ -9,10 +9,14 @@
       - juju
       - kubectl
       - microk8s
-  notify: Assign microk8s group
 
-- name: Flush handlers
-  meta: flush_handlers
+- name: Assign microk8s group
+  become: yes
+  user:
+    name: "{{ user }}"
+    groups:
+      - microk8s
+    append: yes
 
 - name: Set up microk8s
   become: yes

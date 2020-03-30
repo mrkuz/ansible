@@ -6,10 +6,14 @@
     name:
       - docker.io
       - docker-compose
-  notify: Assign docker group
 
-- name: Flush handlers
-  meta: flush_handlers
+- name: Assign docker group
+  become: yes
+  user:
+    name: "{{ user }}"
+    groups:
+      - docker
+    append: yes
 
 - name: Create data directories
   become: yes

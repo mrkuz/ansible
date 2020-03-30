@@ -1,3 +1,0 @@
-- name: Activate swap
-  become: yes
-  command: swapon "/dev/{{ volume_group }}/swap"

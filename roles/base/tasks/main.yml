@@ -108,10 +108,12 @@
     comment: "{{ full_name }}"
     shell: /bin/bash
     append: yes
-  notify: Reset password
+  register: r_add_user
 
-- name: Flush handlers
-  meta: flush_handlers
+- name: Reset password
+  become: yes
+  command: passwd -d "{{ user }}"
+  when: r_add_user.changed
 
 - name: Set up user groups
   become: yes
