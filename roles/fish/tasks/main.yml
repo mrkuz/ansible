@@ -15,6 +15,7 @@
     state: directory
     mode: 0755
   with_items:
+    - "{{ home }}/bin"
     - "{{ home }}/.config/fish"
     - "{{ home }}/.config/fish/functions/"
 

@@ -30,16 +30,6 @@
 #     dest: "{{ home}}/opt/plantuml/planuml.jar"
 #     mode: 0744
 
-- name: Create directories
-  become: yes
-  become_user: "{{ user }}"
-  file:
-    path: "{{ item }}"
-    state: directory
-    mode: 0755
-  with_items:
-    - "{{ home }}/bin"
-
 - name: "Clone repositories"
   become: yes
   become_user: "{{ user }}"
@@ -59,6 +49,11 @@
   become: yes
   become_user: "{{ user }}"
   block:
+    - name: Create directory
+      file:
+        path: "{{ home }}/bin"
+        state: directory
+        mode: 0755
     - name: "Link doom direcotry"
       file:
         src: "{{ home }}/etc/doom.d"

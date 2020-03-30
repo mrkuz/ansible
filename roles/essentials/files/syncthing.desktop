@@ -1,10 +1,5 @@
 [Desktop Entry]
+Name=syncthing
 Type=Application
 Exec=/snap/bin/syncthing
-Hidden=false
-NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=syncthing
-Name=syncthing
-Comment[en_US]=
-Comment=

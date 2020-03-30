@@ -1,0 +1,146 @@
+[org/gnome/desktop/calendar]
+show-weekdate=true
+
+[org/gnome/desktop/input-sources]
+mru-sources=[('xkb', 'us'), ('xkb', 'at')]
+sources=[('xkb', 'us'), ('xkb', 'at')]
+xkb-options=['grp:shifts_toggle']
+
+[org/gnome/desktop/interface]
+clock-show-weekday=true
+cursor-theme='Yaru'
+document-font-name='Ubuntu 11'
+enable-animations=false
+enable-hot-corners=false
+font-name='Ubuntu 11'
+gtk-theme='Yaru-dark'
+icon-theme='Yaru'
+monospace-font-name='Ubuntu Mono 11'
+
+[org/gnome/desktop/peripherals/keyboard]
+numlock-state=true
+
+[org/gnome/desktop/peripherals/touchpad]
+two-finger-scrolling-enabled=true
+
+[org/gnome/desktop/privacy]
+report-technical-problems=false
+
+[org/gnome/desktop/search-providers]
+disabled=['org.gnome.Software.desktop']
+
+[org/gnome/desktop/wm/keybindings]
+cycle-windows=['<Alt>Escape']
+cycle-windows-backward=['<Shift><Alt>Escape']
+maximize=['<Primary><Super>Up']
+minimize=@as []
+move-to-monitor-down=@as []
+move-to-monitor-up=@as []
+move-to-workspace-1=['<Shift><Super>exclam']
+move-to-workspace-2=['<Shift><Super>at']
+move-to-workspace-3=['<Shift><Super>numbersign']
+move-to-workspace-4=['<Shift><Super>dollar']
+move-to-workspace-down=['<Shift><Super>Down']
+move-to-workspace-up=['<Shift><Super>Up']
+show-desktop=['<Super>d']
+switch-applications=@as []
+switch-applications-backward=@as []
+switch-input-source=@as []
+switch-input-source-backward=@as []
+switch-to-workspace-1=['<Super>1']
+switch-to-workspace-2=['<Super>2']
+switch-to-workspace-3=['<Super>3']
+switch-to-workspace-4=['<Super>4']
+switch-to-workspace-down=['<Super>Down']
+switch-to-workspace-up=['<Super>Up']
+switch-windows=['<Alt>Tab']
+switch-windows-backward=['<Shift><Alt>Tab']
+unmaximize=['<Primary><Super>Down']
+
+[org/gnome/desktop/wm/preferences]
+button-layout='close,minimize,maximize:appmenu'
+titlebar-font='Ubuntu Bold 11'
+
+[org/gnome/mutter]
+edge-tiling=true
+
+[org/gnome/mutter/keybindings]
+toggle-tiled-left=['<Primary><Super>Left']
+toggle-tiled-right=['<Primary><Super>Right']
+
+[org/gnome/nautilus/icon-view]
+default-zoom-level='standard'
+
+[org/gnome/nautilus/preferences]
+click-policy='single'
+
+[org/gnome/pomodoro/preferences]
+enabled-plugins=['sounds']
+pause-when-idle=true
+
+[org/gnome/settings-daemon/plugins/media-keys]
+calculator=['Calculator']
+email=['Mail']
+terminal=['<Super>t']
+
+[org/gnome/settings-daemon/plugins/xsettings]
+antialiasing='rgba'
+hinting='slight'
+
+[org/gnome/shell]
+enabled-extensions=['ubuntu-appindicators@ubuntu.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'remove-rounded-corners@markbokil.com', 'Shortcuts@kyle.aims.ac.za', 'switcher@landau.fi', 'transparent-top-bar@zhanghai.me', 'windowIsReady_Remover@nunofarruca@gmail.com', 'pomodoro@arun.codito.in', 'drawOnYourScreen@abakkk.framagit.org']
+
+[org/gnome/shell/extensions/dash-to-dock]
+background-opacity=0.5
+custom-theme-shrink=true
+dash-max-icon-size=48
+dock-position='BOTTOM'
+extend-height=false
+force-straight-corner=true
+hot-keys=false
+icon-size-fixed=false
+intellihide-mode='FOCUS_APPLICATION_WINDOWS'
+require-pressure-to-show=false
+running-indicator-style='DEFAULT'
+scroll-action='cycle-windows'
+show-apps-at-top=true
+show-delay=0.0
+show-mounts=false
+show-show-apps-button=true
+show-trash=false
+transparency-mode='FIXED'
+
+[org/gnome/shell/extensions/shortcuts]
+shortcuts-file='/home/markus/.shortcuts.json'
+show-icon=false
+use-custom-shortcuts=true
+
+[org/gnome/shell/extensions/switcher]
+fade-enable=false
+font-size=uint32 18
+matching=uint32 1
+never-show-onboarding=true
+onboarding-1=uint32 1
+show-launcher=['<Super>space']
+
+[org/gnome/shell/keybindings]
+focus-active-notification=@as []
+toggle-message-tray=['<Super>n']
+
+[org/gnome/system/location]
+enabled=false
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=false
+background-color='rgb(0,43,54)'
+background-transparency-percent=10
+custom-command='tmux'
+font='DejaVu Sans Mono 11'
+foreground-color='rgb(131,148,150)'
+palette=['rgb(7,54,66)', 'rgb(220,50,47)', 'rgb(133,153,0)', 'rgb(181,137,0)', 'rgb(38,139,210)', 'rgb(211,54,130)', 'rgb(42,161,152)', 'rgb(238,232,213)', 'rgb(0,43,54)', 'rgb(203,75,22)', 'rgb(88,110,117)', 'rgb(101,123,131)', 'rgb(131,148,150)', 'rgb(108,113,196)', 'rgb(147,161,161)', 'rgb(253,246,227)']
+scroll-on-output=false
+use-custom-command=true
+use-system-font=false
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=true
