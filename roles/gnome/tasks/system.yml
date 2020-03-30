@@ -1,0 +1,12 @@
+---
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - chrome-gnome-shell
+      - gnome-session
+      - gnome-shell-extension-appindicator
+      - gnome-tweaks
+      - gnome-shell-pomodoro
+      - nautilus

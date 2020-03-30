@@ -1,0 +1,28 @@
+---
+- name: Add user
+  become: yes
+  user:
+    name: "{{ user }}"
+    comment: "{{ full_name }}"
+    shell: /bin/bash
+    append: yes
+  register: r_add_user
+
+- name: Reset password
+  become: yes
+  command: passwd -d "{{ user }}"
+  when: r_add_user.changed
+
+- name: Set up user groups
+  become: yes
+  user:
+    name: "{{ user }}"
+    groups:
+      - adm
+      - cdrom
+      - dip
+      - lpadmin
+      - lxd
+      - plugdev
+      - sudo
+    append: yes

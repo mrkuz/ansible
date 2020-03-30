@@ -1,0 +1,23 @@
+---
+- name: Install emacs
+  become: yes
+  snap:
+    classic: true
+    name: emacs
+
+- name: Install dependencies
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - graphviz
+      - librsvg2-bin
+      - pandoc
+      - texlive-latex-base
+      - texlive-latex-extra
+      - texlive-fonts-recommended
+
+- name: Install snap dependencies
+  become: yes
+  snap:
+    name: hugo

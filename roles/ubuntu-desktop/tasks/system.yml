@@ -1,0 +1,33 @@
+---
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - ubuntu-desktop-minimal
+      - ubuntu-artwork
+      - ubuntu-restricted-extras
+
+- name: Install libraries
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - libgconf-2-4
+      - libcanberra-gtk-module
+      - libcanberra-gtk3-module
+
+- name: Remove unused packages
+  become: yes
+  apt:
+    state: absent
+    purge: yes
+    name:
+      - byobu
+      - firefox
+
+- name: Clean up
+  become: yes
+  apt:
+    autoremove: yes
+    autoclean: yes

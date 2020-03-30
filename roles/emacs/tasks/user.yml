@@ -1,0 +1,47 @@
+---
+# - name: Install plantuml
+#   become: yes
+#   become_user: "{{ user }}"
+#   get_url:
+#     url: https://downloads.sourceforge.net/project/plantuml/plantuml.jar
+#     dest: "{{ home}}/opt/plantuml/planuml.jar"
+#     mode: 0744
+
+- name: "Clone repositories"
+  become: yes
+  become_user: "{{ user }}"
+  git:
+    repo: "https://github.com/{{ item.repo }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    update: no
+  with_items:
+    - repo: hakimel/reveal.js
+      dest: opt/reveal.js
+    - repo: hlissner/doom-emacs
+      dest: .emacs.d
+    - repo: mrkuz/doom.d
+      dest: etc/doom.d
+
+- name: Set up doom
+  become: yes
+  become_user: "{{ user }}"
+  block:
+    - name: Create directory
+      file:
+        path: "{{ home }}/bin"
+        state: directory
+        mode: 0755
+    - name: "Link doom direcotry"
+      file:
+        src: "{{ home }}/etc/doom.d"
+        dest: "{{ home }}/.doom.d"
+        state: link
+    - name: "Link doom binary"
+      file:
+        src: "{{ home }}/.emacs.d/bin/doom"
+        dest: "{{ home }}/bin/doom"
+        state: link
+    - name: Initialize doom
+      command: "{{ home }}/bin/doom sync"
+      args:
+        creates: "{{ home }}/.doom.d/config.el"

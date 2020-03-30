@@ -1,0 +1,140 @@
+---
+- name: Create directories
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ home }}/Backup"
+    - "{{ home }}/bin"
+    - "{{ home }}/Documents"
+    - "{{ home }}/Downloads"
+    - "{{ home }}/Downloads/Torrent"
+    - "{{ home }}/etc"
+    - "{{ home }}/Games"
+    - "{{ home }}/Games/Steam"
+    - "{{ home }}/Music"
+    - "{{ home }}/Notes"
+    - "{{ home }}/opt"
+    - "{{ home }}/opt/plantuml"
+    - "{{ home }}/org"
+    - "{{ home }}/org/lists"
+    - "{{ home }}/org/mobile"
+    - "{{ home }}/org/projects"
+    - "{{ home }}/Pictures"
+    - "{{ home }}/Scripts"
+    - "{{ home }}/Shared"
+    - "{{ home }}/src"
+    - "{{ home }}/tmp"
+    - "{{ home }}/Videos"
+    - "{{ home }}/Workspace"
+    - "{{ home }}/.gradle"
+    - "{{ home }}/.var"
+    - "{{ home }}/.ansible"
+    - "{{ home }}/.ansible/tmp"
+    - "{{ home }}/.config/Code"
+    - "{{ home }}/.config/Code/User"
+    - "{{ home }}/.vscode/DevOps"
+    - "{{ home }}/.vscode/DevOps/extensions"
+    - "{{ home }}/.vscode/DevOps/User"
+    - "{{ home }}/.vscode/Java"
+    - "{{ home }}/.vscode/Java/extensions"
+    - "{{ home }}/.vscode/Java/User"
+    - "{{ home }}/.vscode/JavaScript"
+    - "{{ home }}/.vscode/JavaScript/extensions"
+    - "{{ home }}/.vscode/JavaScript/User"
+
+- name: "Clone repositories"
+  become: yes
+  become_user: "{{ user }}"
+  git:
+    repo: "https://github.com/{{ item.repo }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    update: no
+  with_items:
+    - repo: abhigenie92/unattended_upgrades_repos
+      dest: src/unattended_upgrades_repos
+    - repo: TylerBrock/mongo-hacker
+      dest: src/mongo-hacker
+    - repo: mrkuz/ansible
+      dest: etc/ansible
+    - repo: mrkuz/dotfiles
+      dest: etc/dotfiles.git
+
+- name: Link dotfiles
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "{{ home }}/etc/dotfiles.git/{{ item }}"
+    dest: "{{ home }}/{{ item }}"
+    state: link
+  with_items:
+    - .bashrc.local
+    - .config/Code/User/keybindings.json
+    - .config/Code/User/settings.json
+    - .eclipse-java-style.xml
+    - .gitconfig
+    - .gradle/gradle.properties
+    - .inputrc
+    - .tmux.conf
+    - .shortcuts.json
+
+- name: Set up vscode profiles
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "{{ home }}/etc/dotfiles.git/.config/Code/User/{{ item.file }}"
+    dest: "{{ home }}/.vscode/{{ item.profile }}/User/{{ item.file }}"
+    state: link
+  with_items:
+    - { profile: DevOps, file: settings.json }
+    - { profile: DevOps, file: keybindings.json }
+    - { profile: Java, file: settings.json }
+    - { profile: Java, file: keybindings.json }
+    - { profile: JavaScript, file: settings.json }
+    - { profile: JavaScript, file: keybindings.json }
+
+- name: Configure bash
+  become: yes
+  become_user: "{{ user }}"
+  lineinfile:
+    path: "{{ home }}/.bashrc"
+    line: . ~/.bashrc.local
+
+- name: Install mongo-hacker
+  become: yes
+  become_user: "{{ user }}"
+  command: "make install"
+  args:
+    chdir: "{{ home }}/src/mongo-hacker"
+    creates: "{{ home }}/.mongorc.js"
+
+- name: Install sdkman
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+    export SDKMAN_DIR="{{ home }}/opt/sdkman"
+    curl -s "https://get.sdkman.io" | bash
+    source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
+  args:
+    executable: /usr/bin/bash
+    creates: "{{ home }}/opt/sdkman"
+
+- name: Install sdkman packages
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+    export SDKMAN_DIR="{{ home }}/opt/sdkman"
+    source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
+    sdk install {{ item }}
+  args:
+    executable: /usr/bin/bash
+    creates: "{{ home }}/opt/sdkman/candidates/{{ item }}"
+  with_items:
+    - java
+    - maven
+    - groovy
+    - gradle
+    - visualvm

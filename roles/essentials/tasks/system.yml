@@ -1,0 +1,26 @@
+---
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - git
+      - gitk
+      - rclone
+      - ripgrep
+      - rsync
+      - tmux
+
+- name: Install snaps
+  become: yes
+  snap:
+    classic: true
+    name: syncthing
+
+- name: Install PIP packages
+  become: yes
+  pip:
+    executable: pip3
+    name:
+      - ansible
+      - ansible-lint

@@ -1,0 +1,10 @@
+---
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - mesa-vulkan-drivers
+      - mesa-vulkan-drivers:i386
+      - mesa-utils
+      - vulkan-utils

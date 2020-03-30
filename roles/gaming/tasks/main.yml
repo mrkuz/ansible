@@ -1,15 +1,2 @@
 ---
-- name: Add repositories
-  become: yes
-  apt_repository:
-    repo: "ppa:lutris-team/lutris"
-
-- name: Install packages
-  become: yes
-  apt:
-    update_cache: yes
-    name:
-      - lutris
-      - steam
-      - steam-devices
-      - wine64
+- import_tasks: system.yml

@@ -1,0 +1,102 @@
+---
+- name: Enable i386
+  become: yes
+  command: dpkg --add-architecture i386
+  args:
+    creates: /var/lib/dpkg/arch
+
+- name: Enable Canonical partners repository
+  become: yes
+  lineinfile:
+    path: /etc/apt/sources.list
+    regex: "^# deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner"
+    line: "deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner"
+
+- name: Install flatpak
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - flatpak
+      - gnome-software-plugin-flatpak
+
+- name: Set up flatpak
+  become: yes
+  flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install python
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - python
+      - python3
+      - python3-pip
+      - python3-psutil
+      - python3-pyqt5
+
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - bridge-utils
+      - cifs-utils
+      - cgroup-tools
+      - cups
+      - curl
+      - dos2unix
+      - lm-sensors
+      - net-tools
+      - openvpn
+      - openvpn-systemd-resolved
+      - p7zip-full
+      - pwgen
+      - smartmontools
+      - tuptime
+      - unrar
+      - uuid
+
+- name: Configure nsswitch.conf
+  become: yes
+  lineinfile:
+    path: /etc/nsswitch.conf
+    regex: "^hosts:"
+    line: "hosts:          files resolve [!UNAVAIL=return] dns mdns4_minimal [NOTFOUND=return]"
+
+- name: Disable apport
+  become: yes
+  lineinfile:
+    path: /etc/default/apport
+    regex: "^enabled="
+    line: "enabled=0"
+
+- name: Configure grub
+  become: yes
+  block:
+    - name: Set grub timeout style
+      lineinfile:
+        path: /etc/default/grub
+        regex: "^GRUB_TIMEOUT_STYLE="
+        line: "GRUB_TIMEOUT_STYLE="
+    - name: Set grub timeout
+      lineinfile:
+        path: /etc/default/grub
+        regex: "^GRUB_TIMEOUT="
+        line: "GRUB_TIMEOUT=5"
+    - name: Set grub recordfail timeout"
+      lineinfile:
+        path: /etc/default/grub
+        regex: "^GRUB_RECORDFAIL_TIMEOUT=5"
+        line: "GRUB_RECORDFAIL_TIMEOUT=5"
+
+- name: Configure unattended upgrades
+  become: yes
+  copy:
+    src: 50unattended-upgrades
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    owner: root
+    group: root
+    mode: "0644"
