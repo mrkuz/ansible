@@ -4,6 +4,7 @@
     url: "https://extensions.gnome.org/extension-info/?pk={{ extension_id }}&shell_version={{ gnome_shell_version }}"
     return_content: yes
   register: r_info
+  check_mode: no
 
 - name: "Check status - {{ r_info.json.name }}"
   become: true
@@ -38,4 +39,4 @@
       file:
         state: absent
         path: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_info.json.uuid }}.zip"
-  when: r_installed.stat.exists == false
+  when: not ansible_check_mode and r_installed.stat.exists == false

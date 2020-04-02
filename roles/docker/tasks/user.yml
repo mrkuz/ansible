@@ -35,6 +35,7 @@
   command: id -u
   register: uid
   changed_when: no
+  check_mode: no
 
 - name: Get group id
   become: yes
@@ -42,6 +43,7 @@
   command: id -g
   register: gid
   changed_when: no
+  check_mode: no
 
 - name: Build docker images
   become: yes
@@ -53,7 +55,7 @@
       args:
         USER: "{{ user }}"
         USER_ID: "{{ uid.stdout }}"
-        GROUP: "{{ user  }}"
+        GROUP: "{{ user }}"
         GROUP_ID: "{{ gid.stdout }}"
     name: mrkuz/{{ item }}
     source: build

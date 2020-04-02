@@ -10,14 +10,18 @@
     - ubuntu-desktop
     - gnome
     - essentials
+    - syncthing
     - fish
     - emacs
-    # - common
-    # - at_home
+    - google-chrome
+    - common
+    - at_home
     # - at_work
-    # - development
-    # - kubernetes
-    # - mesa
+    - development
+    - kubernetes
+    - mesa
     # - nvidia
-    # - gaming
+    - gaming
     - user
+    - sdkman
+    - vscode

@@ -31,7 +31,7 @@
         path: "{{ home }}/bin"
         state: directory
         mode: 0755
-    - name: "Link doom direcotry"
+    - name: "Link doom directory"
       file:
         src: "{{ home }}/etc/doom.d"
         dest: "{{ home }}/.doom.d"
