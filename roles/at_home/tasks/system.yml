@@ -18,5 +18,6 @@
   flatpak:
     name: "{{ item }}"
   with_items:
+    - com.spotify.Client
     - org.jdownloader.JDownloader
     - org.qbittorrent.qBittorrent

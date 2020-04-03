@@ -31,14 +31,6 @@
       - baobab
       - gparted
 
-- name: Install virtualization packages
-  become: yes
-  apt:
-    update_cache: yes
-    name:
-      - virtualbox
-      - qemu-kvm
-
 - name: Install snaps
   become: yes
   snap:
@@ -51,6 +43,5 @@
     name: "{{ item }}"
   with_items:
     - com.skype.Client
-    - com.spotify.Client
     - org.gimp.GIMP
     - org.videolan.VLC
