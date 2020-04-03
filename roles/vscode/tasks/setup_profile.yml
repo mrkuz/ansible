@@ -1,0 +1,36 @@
+---
+- name: "Create directories - {{ profile.name }}"
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ home }}/.vscode/{{ profile.name }}"
+    - "{{ home }}/.vscode/{{ profile.name }}/extensions"
+    - "{{ home }}/.vscode/{{ profile.name }}/User"
+
+- name: "Link dotfiles - {{ profile.name }}"
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "{{ home }}/etc/dotfiles.git/.config/Code/User/{{ item }}"
+    dest: "{{ home }}/.vscode/{{ profile.name }}/User/{{ item }}"
+    state: link
+  with_items:
+    - settings.json
+    - keybindings.json
+
+- name: "Install extensions - {{ profile.name }}"
+  become: yes
+  become_user: "{{ user }}"
+  command: |
+    code
+    --user-data-dir {{ home }}/.vscode/{{ profile.name }}
+    --extensions-dir {{ home }}/.vscode/{{ profile.name }}/extensions
+    --install-extension {{ item }}
+    --force
+  args:
+    creates: "{{ home }}/.vscode/{{ profile.name }}/extensions/{{ item | lower }}-*"
+  with_items: "{{ profile.extension_ids }}"

@@ -11,15 +11,6 @@
     - "{{ home }}/.config/Code"
     - "{{ home }}/.config/Code/User"
     - "{{ home }}/.vscode"
-    - "{{ home }}/.vscode/DevOps"
-    - "{{ home }}/.vscode/DevOps/extensions"
-    - "{{ home }}/.vscode/DevOps/User"
-    - "{{ home }}/.vscode/Java"
-    - "{{ home }}/.vscode/Java/extensions"
-    - "{{ home }}/.vscode/Java/User"
-    - "{{ home }}/.vscode/JavaScript"
-    - "{{ home }}/.vscode/JavaScript/extensions"
-    - "{{ home }}/.vscode/JavaScript/User"
 
 - name: "Clone repositories"
   become: yes
@@ -44,20 +35,42 @@
     - .config/Code/User/keybindings.json
     - .config/Code/User/settings.json
     - .eclipse-java-style.xml
-  when: not r_vscode_clone_repos.skipped
+  when: r_vscode_clone_repos is not skipped
 
-- name: Set up vscode profiles
-  become: yes
-  become_user: "{{ user }}"
-  file:
-    src: "{{ home }}/etc/dotfiles.git/.config/Code/User/{{ item.file }}"
-    dest: "{{ home }}/.vscode/{{ item.profile }}/User/{{ item.file }}"
-    state: link
-  with_items:
-    - { profile: DevOps, file: settings.json }
-    - { profile: DevOps, file: keybindings.json }
-    - { profile: Java, file: settings.json }
-    - { profile: Java, file: keybindings.json }
-    - { profile: JavaScript, file: settings.json }
-    - { profile: JavaScript, file: keybindings.json }
-  when: not r_vscode_clone_repos.skipped
+- name: Set up profile
+  include_tasks: setup_profile.yml
+  vars:
+    profile: "{{ outer_item }}"
+  loop_control:
+    loop_var: outer_item
+  loop:
+    - name: Java
+      extension_ids:
+        - CoenraadS.bracket-pair-colorizer
+        - lfs.vscode-emacs-friendly
+        - rokoroku.vscode-theme-darcula
+        - vscode-icons-team.vscode-icons
+        #
+        - GabrielBB.vscode-lombok
+        - Pivotal.vscode-boot-dev-pack
+        - redhat.vscode-xml
+        - vscjava.vscode-java-pack
+    - name: JavaScript
+      extension_ids:
+        - CoenraadS.bracket-pair-colorizer
+        - lfs.vscode-emacs-friendly
+        - rokoroku.vscode-theme-darcula
+        - vscode-icons-team.vscode-icons
+        #
+        - mubaidr.vuejs-extension-pack
+        - naumovs.color-highlight
+    - name: DevOps
+      extension_ids:
+        - CoenraadS.bracket-pair-colorizer
+        - lfs.vscode-emacs-friendly
+        - rokoroku.vscode-theme-darcula
+        - vscode-icons-team.vscode-icons
+        #
+        - ms-azuretools.vscode-docker
+        - ms-kubernetes-tools.vscode-kubernetes-tools
+        - vscoss.vscode-ansible

@@ -68,7 +68,7 @@
     - .inputrc
     - .tmux.conf
     - .shortcuts.json
-  when: not r_user_clone_repos.skipped
+  when: r_user_clone_repos is not skipped
 
 - name: Configure bash
   become: yes
@@ -84,4 +84,4 @@
   args:
     chdir: "{{ home }}/src/mongo-hacker"
     creates: "{{ home }}/.mongorc.js"
-  when: not r_user_clone_repos.skipped
+  when: r_user_clone_repos is not skipped
