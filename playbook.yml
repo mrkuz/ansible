@@ -15,6 +15,7 @@
     - emacs
     - google-chrome
     - common
+    - virtualization
     - at_home
     # - at_work
     - development
