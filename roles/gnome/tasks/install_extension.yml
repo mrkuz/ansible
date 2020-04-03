@@ -3,40 +3,40 @@
   uri:
     url: "https://extensions.gnome.org/extension-info/?pk={{ extension_id }}&shell_version={{ gnome_shell_version }}"
     return_content: yes
-  register: r_info
+  register: r_gnome_extension_info
   check_mode: no
 
-- name: "Check status - {{ r_info.json.name }}"
+- name: "Check status - {{ r_gnome_extension_info.json.name }}"
   become: true
   become_user: "{{ user }}"
   stat:
-    path: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_info.json.uuid }}"
-  register: r_installed
+    path: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_gnome_extension_info.json.uuid }}"
+  register: r_gnome_extension_installed
 
 - name: Install extension
   become: true
   become_user: "{{ user }}"
   block:
-    - name: "Create directory - {{ r_info.json.name }}"
+    - name: "Create directory - {{ r_gnome_extension_info.json.name }}"
       file:
         state: directory
-        path: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_info.json.uuid }}"
+        path: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_gnome_extension_info.json.uuid }}"
         owner: "{{ user }}"
         group: "{{ user }}"
         mode: "0755"
-    - name: "Download ZIP - {{ r_info.json.name }}"
+    - name: "Download ZIP - {{ r_gnome_extension_info.json.name }}"
       get_url:
-        url: "https://extensions.gnome.org{{ r_info.json.download_url }}"
-        dest: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_info.json.uuid }}.zip"
-    - name: "Extract ZIP - {{ r_info.json.name }}"
+        url: "https://extensions.gnome.org{{ r_gnome_extension_info.json.download_url }}"
+        dest: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_gnome_extension_info.json.uuid }}.zip"
+    - name: "Extract ZIP - {{ r_gnome_extension_info.json.name }}"
       unarchive:
-        src: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_info.json.uuid }}.zip"
-        dest: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_info.json.uuid }}"
+        src: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_gnome_extension_info.json.uuid }}.zip"
+        dest: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_gnome_extension_info.json.uuid }}"
         remote_src: yes
-    - name: "Enable extension - {{ r_info.json.name }}"
-      command: "gnome-shell-extension-tool --enable-extension {{ r_info.json.uuid }}"
-    - name: "Clean up - {{ r_info.json.name }}"
+    - name: "Enable extension - {{ r_gnome_extension_info.json.name }}"
+      command: "gnome-shell-extension-tool --enable-extension {{ r_gnome_extension_info.json.uuid }}"
+    - name: "Clean up - {{ r_gnome_extension_info.json.name }}"
       file:
         state: absent
-        path: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_info.json.uuid }}.zip"
-  when: not ansible_check_mode and r_installed.stat.exists == false
+        path: "{{ home }}/.local/share/gnome-shell/extensions/{{ r_gnome_extension_info.json.uuid }}.zip"
+  when: not ansible_check_mode and r_gnome_extension_installed.stat.exists == false

@@ -6,12 +6,12 @@
     comment: "{{ full_name }}"
     shell: /bin/bash
     append: yes
-  register: r_add_user
+  register: r_base_add_user
 
 - name: Reset password
   become: yes
   command: passwd -d "{{ user }}"
-  when: r_add_user.changed
+  when: r_base_add_user.changed
 
 - name: Set up user groups
   become: yes
