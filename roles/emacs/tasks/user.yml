@@ -21,6 +21,7 @@
       dest: .emacs.d
     - repo: mrkuz/doom.d
       dest: etc/doom.d
+  register: r_emacs_clone_repos
 
 - name: Set up doom
   become: yes
@@ -45,3 +46,4 @@
       command: "{{ home }}/bin/doom sync"
       args:
         creates: "{{ home }}/.doom.d/config.el"
+  when: not r_emacs_clone_repos.skipped

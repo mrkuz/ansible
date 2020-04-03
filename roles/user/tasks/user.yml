@@ -51,6 +51,7 @@
       dest: etc/ansible
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
+  register: r_user_clone_repos
 
 - name: Link dotfiles
   become: yes
@@ -67,6 +68,7 @@
     - .inputrc
     - .tmux.conf
     - .shortcuts.json
+  when: not r_user_clone_repos.skipped
 
 - name: Configure bash
   become: yes
@@ -82,3 +84,4 @@
   args:
     chdir: "{{ home }}/src/mongo-hacker"
     creates: "{{ home }}/.mongorc.js"
+  when: not r_user_clone_repos.skipped

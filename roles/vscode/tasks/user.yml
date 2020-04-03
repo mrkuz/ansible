@@ -31,6 +31,7 @@
   with_items:
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
+  register: r_vscode_clone_repos
 
 - name: Link dotfiles
   become: yes
@@ -43,6 +44,7 @@
     - .config/Code/User/keybindings.json
     - .config/Code/User/settings.json
     - .eclipse-java-style.xml
+  when: not r_vscode_clone_repos.skipped
 
 - name: Set up vscode profiles
   become: yes
@@ -58,3 +60,4 @@
     - { profile: Java, file: keybindings.json }
     - { profile: JavaScript, file: settings.json }
     - { profile: JavaScript, file: keybindings.json }
+  when: not r_vscode_clone_repos.skipped

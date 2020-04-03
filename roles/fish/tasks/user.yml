@@ -21,6 +21,7 @@
   with_items:
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
+  register: r_fish_clone_repos
 
 - name: Link dotfiles
   become: yes
@@ -38,6 +39,7 @@
     - .config/fish/functions/scratch.fish
     - .config/fish/functions/todo.fish
     - .config/fish/functions/x11d.fish
+  when: not r_fish_clone_repos.skipped
 
 - name: Install fisher
   become: yes
@@ -46,6 +48,7 @@
   args:
     warn: false
     creates: "{{ home }}/.config/fish/functions/fisher.fish"
+  register: r_fish_install_fisher
 
 - name: Set up fish
   become: yes
@@ -59,3 +62,4 @@
   args:
     executable: /usr/bin/fish
     creates: "{{ home }}/.var/fish.done"
+  when: not r_fish_install_fisher.skipped
