@@ -25,6 +25,7 @@
     name:
       - byobu
       - firefox
+      - xiterm+thai
 
 - name: Clean up
   become: yes
