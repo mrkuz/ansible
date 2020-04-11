@@ -51,6 +51,8 @@
       dest: etc/ansible
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
+    - repo: mrkuz/vagrant-k3s
+      dest: src/vagrant-k3s
   register: r_user_clone_repos
 
 - name: Link dotfiles
