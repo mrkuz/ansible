@@ -1,8 +1,23 @@
 ---
-- name: Add repositories
+- name: Add repository keys
+  become: yes
+  apt_key:
+    id: C95B321B61E88C1809C4F759DDCAE044F796ECB0
+    url: https://nvidia.github.io/nvidia-docker/gpgkey
+
+- name: Add driver repository
   become: yes
   apt_repository:
     repo: "ppa:graphics-drivers/ppa"
+
+- name: Add container toolkit repository
+  become: yes
+  copy:
+    src: nvidia-docker.list
+    dest: /etc/apt/sources.list.d/nvidia-docker.list
+    owner: root
+    group: root
+    mode: "0644"
 
 - name: Install packages
   become: yes
@@ -12,6 +27,15 @@
       - nvidia-driver-440
       - nvidia-settings
       - vulkan-utils
+      - nvidia-container-toolkit
+  register: r_nvidia_install_packages
+
+- name: Restart docker
+  become: yes
+  systemd:
+    state: restarted
+    name: docker
+  when: r_nvidia_install_packages.changed
 
 - name: Remove conflicting packages
   become: yes
