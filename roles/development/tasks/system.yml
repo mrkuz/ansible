@@ -5,8 +5,6 @@
     classic: true
     name:
       - android-studio
-      - intellij-idea-community
-      - go
       - netbeans
       - protobuf
 
