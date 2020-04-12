@@ -1,26 +1,8 @@
 ---
-- name: Add repository keys
-  become: yes
-  apt_key:
-    id: D43F640145369C51D786DDEA76F1A20FF987672F
-    url: https://dl.winehq.org/wine-builds/winehq.key
-
-- name: Add wine repository
-  become: yes
-  apt_repository:
-    repo: "deb https://dl.winehq.org/wine-builds/ubuntu/ {{ ansible_distribution_release }} main"
-
-- name: Add lutris repository
-  become: yes
-  apt_repository:
-    repo: "ppa:lutris-team/lutris"
-
 - name: Install packages
   become: yes
   apt:
     update_cache: yes
     name:
-      - lutris
       - steam
       - steam-devices
-      - winehq-stable

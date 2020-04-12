@@ -62,5 +62,4 @@
   with_items:
     - ubuntu-base
     - firefox
-    - inkscape
     - libreoffice
