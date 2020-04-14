@@ -30,6 +30,7 @@
     name:
       - baobab
       - gparted
+      - remmina
 
 - name: Install snaps
   become: yes
