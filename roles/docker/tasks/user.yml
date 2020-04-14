@@ -61,5 +61,6 @@
     source: build
   with_items:
     - ubuntu-base
-    - firefox
-    - libreoffice
+    - ubuntu-base-ansible
+    - ubuntu-base-x11d
+    - ubuntu-desktop
