@@ -3,6 +3,7 @@
   become: yes
   snap:
     classic: true
+    channel: beta
     name: emacs
 
 - name: Install dependencies
