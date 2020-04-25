@@ -12,6 +12,7 @@
       - mkvtoolnix
       - nmap
       - tidy
+      - wakeonlan
 
 - name: Install X tools
   become: yes

@@ -62,5 +62,6 @@
   with_items:
     - ubuntu-base
     - ubuntu-base-ansible
+    - ubuntu-base-cli
     - ubuntu-base-x11d
     - ubuntu-desktop

@@ -47,6 +47,7 @@
       - cgroup-tools
       - cups
       - curl
+      - dnsmasq
       - dos2unix
       - lm-sensors
       - net-tools
