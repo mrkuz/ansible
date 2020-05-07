@@ -50,17 +50,20 @@
         - lfs.vscode-emacs-friendly
         - rokoroku.vscode-theme-darcula
         - vscode-icons-team.vscode-icons
+        - tombonnike.vscode-status-bar-format-toggle
         #
         - GabrielBB.vscode-lombok
         - Pivotal.vscode-boot-dev-pack
         - redhat.vscode-xml
         - vscjava.vscode-java-pack
+        - sonarsource.sonarlint-vscode
     - name: JavaScript
       extension_ids:
         - CoenraadS.bracket-pair-colorizer
         - lfs.vscode-emacs-friendly
         - rokoroku.vscode-theme-darcula
         - vscode-icons-team.vscode-icons
+        - tombonnike.vscode-status-bar-format-toggle
         #
         - mubaidr.vuejs-extension-pack
         - naumovs.color-highlight
