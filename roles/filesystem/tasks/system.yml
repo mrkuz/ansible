@@ -6,7 +6,8 @@
     lv: "{{ item.name }}"
     size: "{{ item.size }}"
   with_items:
-    - { name: home, size: 200G }
+    - { name: home, size: 100G }
+    - { name: user, size: 100G }
     - { name: snap, size: 20G }
     - { name: flatpak, size: 20G }
     - { name: docker, size: 20G }
@@ -20,6 +21,7 @@
     dev: "/dev/{{ volume_group }}/{{ item.name }}"
   with_items:
     - { name: home, type: ext4 }
+    - { name: user, type: ext4 }
     - { name: snap, type: ext4 }
     - { name: flatpak, type: ext4 }
     - { name: docker, type: ext4 }
@@ -35,6 +37,7 @@
     passno: "{{ item.pass }}"
     state: mounted
   with_items:
+    - { name: user, type: ext4, target: /data/user, pass: 2 }
     - { name: snap, type: ext4, target: /var/lib/snapd, pass: 2 }
     - { name: flatpak, type: ext4, target: /var/lib/flatpak, pass: 2 }
     - { name: docker, type: ext4, target: /var/lib/docker, pass: 2 }

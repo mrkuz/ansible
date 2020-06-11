@@ -1,4 +1,24 @@
 ---
+- name: Create user data directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+  with_items:
+    - "/data/user/{{ user }}"
+    - "/data/user/{{ user }}/opt"
+    - "/data/user/{{ user }}/Downloads"
+    - "/data/user/{{ user }}/Games"
+    - "/data/user/{{ user }}/VirtualBox VMs"
+    - "/data/user/{{ user }}/.android/avd"
+    - "/data/user/{{ user }}/.emacs.d/.local/straight/repos"
+    - "/data/user/{{ user }}/.gradle/wrapper/dists"
+    - "/data/user/{{ user }}/.m2/repository"
+    - "/data/user/{{ user }}/.vagrant.d/boxes"
+
 - name: Create directories
   become: yes
   become_user: "{{ user }}"
@@ -10,14 +30,11 @@
     - "{{ home }}/Backup"
     - "{{ home }}/bin"
     - "{{ home }}/Documents"
-    - "{{ home }}/Downloads"
     - "{{ home }}/Downloads/Torrent"
     - "{{ home }}/etc"
-    - "{{ home }}/Games"
     - "{{ home }}/Games/Steam"
     - "{{ home }}/Music"
     - "{{ home }}/Notes"
-    - "{{ home }}/opt"
     - "{{ home }}/opt/plantuml"
     - "{{ home }}/org"
     - "{{ home }}/org/lists"
@@ -30,10 +47,35 @@
     - "{{ home }}/tmp"
     - "{{ home }}/Videos"
     - "{{ home }}/Workspace"
+    - "{{ home }}/.android"
+    - "{{ home }}/.emacs.d"
+    - "{{ home }}/.emacs.d/local"
+    - "{{ home }}/.emacs.d/local/straight"
     - "{{ home }}/.gradle"
+    - "{{ home }}/.gradle/wrapper"
+    - "{{ home }}/.m2"
+    - "{{ home }}/.vagrant.d"
     - "{{ home }}/.var"
     - "{{ home }}/.ansible"
     - "{{ home }}/.ansible/tmp"
+
+- name: Link data directories
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "/data/user/{{ user }}/{{ item }}"
+    dest: "{{ home }}/{{ item }}"
+    state: link
+  with_items:
+    - "opt"
+    - "Downloads"
+    - "Games"
+    - "VirtualBox VMs"
+    - ".android/avd"
+    - ".emacs.d/.local/straight/repos"
+    - ".gradle/wrapper/dists"
+    - ".m2/repository"
+    - ".vagrant.d/boxes"
 
 - name: "Clone repositories"
   become: yes
