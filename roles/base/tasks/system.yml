@@ -49,6 +49,7 @@
       - curl
       - dnsmasq
       - dos2unix
+      - ecryptfs-utils
       - lm-sensors
       - net-tools
       - openvpn
