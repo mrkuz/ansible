@@ -37,6 +37,7 @@
     - "{{ home }}/Notes"
     - "{{ home }}/opt/plantuml"
     - "{{ home }}/org"
+    - "{{ home }}/org/calendar"
     - "{{ home }}/org/lists"
     - "{{ home }}/org/mobile"
     - "{{ home }}/org/projects"
