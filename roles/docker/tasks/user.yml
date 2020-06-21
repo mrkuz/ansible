@@ -7,17 +7,6 @@
       - docker
     append: yes
 
-- name: Create user data directories
-  become: yes
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0755
-  with_items:
-    - "/data/docker-home/{{ user }}"
-
 - name: "Clone repositories"
   become: yes
   become_user: "{{ user }}"

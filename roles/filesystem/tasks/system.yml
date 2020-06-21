@@ -11,7 +11,6 @@
     - { name: snap, size: 20G }
     - { name: flatpak, size: 20G }
     - { name: docker, size: 20G }
-    - { name: docker-home-overlay, size: 10G }
     - { name: swap, size: 1G }
 
 - name: Create filesystems
@@ -25,7 +24,6 @@
     - { name: snap, type: ext4 }
     - { name: flatpak, type: ext4 }
     - { name: docker, type: ext4 }
-    - { name: docker-home-overlay, type: ext4 }
     - { name: swap, type: swap }
 
 - name: Mount volumes
@@ -41,12 +39,6 @@
     - { name: snap, type: ext4, target: /var/lib/snapd, pass: 2 }
     - { name: flatpak, type: ext4, target: /var/lib/flatpak, pass: 2 }
     - { name: docker, type: ext4, target: /var/lib/docker, pass: 2 }
-    - {
-        name: docker-home-overlay,
-        type: ext4,
-        target: /data/docker-home-overlay,
-        pass: 2,
-      }
 
 - name: Mount home
   become: true
@@ -69,3 +61,10 @@
   become: yes
   command: swapon "/dev/{{ volume_group }}/swap"
   when: r_filesystem_mount_swap.changed
+
+- name: Create data directory
+  become: yes
+  file:
+    path: /data
+    state: directory
+    mode: 0755

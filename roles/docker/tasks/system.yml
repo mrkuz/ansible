@@ -6,14 +6,3 @@
     name:
       - docker.io
       - docker-compose
-
-- name: Create data directories
-  become: yes
-  file:
-    path: "{{ item }}"
-    state: directory
-    mode: 0755
-  with_items:
-    - /data
-    - /data/docker-home
-    - /data/docker-home-overlay
