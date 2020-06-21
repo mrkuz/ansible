@@ -6,3 +6,4 @@
     name:
       - docker.io
       - docker-compose
+      - fuse-overlayfs
