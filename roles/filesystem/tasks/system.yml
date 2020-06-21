@@ -69,13 +69,3 @@
   become: yes
   command: swapon "/dev/{{ volume_group }}/swap"
   when: r_filesystem_mount_swap.changed
-
-- name: Mount AUFS
-  become: true
-  mount:
-    path: /data/docker-home
-    src: none
-    fstype: aufs
-    passno: "2"
-    state: mounted
-    opts: dirs=/data/docker-home-overlay=rw:/home=ro,x-systemd.requires-mounts-for=/home
