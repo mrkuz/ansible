@@ -8,5 +8,5 @@
       - gnome-session
       - gnome-shell-extension-appindicator
       - gnome-tweaks
-      - gnome-shell-pomodoro
+      - gnome-clocks
       - nautilus
