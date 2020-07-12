@@ -26,17 +26,3 @@
     name: "{{ item }}"
   with_items:
     - com.getpostman.Postman
-
-- name: Install PIP packages
-  become: yes
-  pip:
-    executable: pip3
-    name: mitmproxy
-
-- name: Install NPM packages
-  become: yes
-  npm:
-    name: "{{ item }}"
-    global: yes
-  with_items:
-    - gulp

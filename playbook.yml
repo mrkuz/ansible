@@ -9,7 +9,6 @@
     - docker
     - ubuntu-desktop
     - gnome
-    - essentials
     - syncthing
     - fish
     - emacs
@@ -22,7 +21,6 @@
     - kubernetes
     - mesa
     # - nvidia
-    - gaming
     - user
     - sdkman
     - vscode

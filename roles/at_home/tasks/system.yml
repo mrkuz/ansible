@@ -5,7 +5,6 @@
     update_cache: yes
     name:
       - simple-scan
-      - thunderbird
 
 - name: Install flatpaks
   become: yes
@@ -13,5 +12,7 @@
     name: "{{ item }}"
   with_items:
     - com.spotify.Client
+    - com.valvesoftware.Steam
+    - org.mozilla.Thunderbird
     - org.qbittorrent.qBittorrent
     - tv.kodi.Kodi

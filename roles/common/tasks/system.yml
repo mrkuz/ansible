@@ -6,12 +6,23 @@
     name:
       - adb
       - build-essential
+      - dos2unix
+      - git
+      - gitk
       - gocr
       - htop
       - imagemagick
       - mkvtoolnix
       - nmap
+      - p7zip-full
+      - pwgen
+      - rclone
+      - ripgrep
+      - rsync
       - tidy
+      - tmux
+      - unrar
+      - uuid
       - wakeonlan
 
 - name: Install X tools
@@ -31,7 +42,6 @@
     name:
       - baobab
       - gparted
-      - remmina
 
 - name: Install snaps
   become: yes
@@ -45,5 +55,7 @@
     name: "{{ item }}"
   with_items:
     - com.skype.Client
+    - com.github.tchx84.Flatseal
     - org.gimp.GIMP
+    - org.remmina.Remmina
     - org.videolan.VLC

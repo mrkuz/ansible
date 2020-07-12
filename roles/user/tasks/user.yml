@@ -1,4 +1,40 @@
 ---
+- name: Create directories
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ home }}/Backup"
+    - "{{ home }}/bin"
+    - "{{ home }}/Documents"
+    - "{{ home }}/Downloads/Torrent"
+    - "{{ home }}/etc"
+    - "{{ home }}/Games/Steam"
+    - "{{ home }}/Music"
+    - "{{ home }}/Notes"
+    - "{{ home }}/opt/plantuml"
+    - "{{ home }}/org/calendar"
+    - "{{ home }}/org/lists"
+    - "{{ home }}/org/mobile"
+    - "{{ home }}/org/projects"
+    - "{{ home }}/Pictures"
+    - "{{ home }}/Scripts"
+    - "{{ home }}/Shared"
+    - "{{ home }}/src"
+    - "{{ home }}/tmp"
+    - "{{ home }}/Videos"
+    - "{{ home }}/Workspace"
+    - "{{ home }}/.android"
+    - "{{ home }}/.emacs.d/local/straight"
+    - "{{ home }}/.gradle/wrapper"
+    - "{{ home }}/.m2"
+    - "{{ home }}/.vagrant.d"
+    - "{{ home }}/.var"
+    - "{{ home }}/.ansible/tmp"
+
 - name: Create user data directories
   become: yes
   file:
@@ -18,47 +54,6 @@
     - "/data/user/{{ user }}/.gradle/wrapper/dists"
     - "/data/user/{{ user }}/.m2/repository"
     - "/data/user/{{ user }}/.vagrant.d/boxes"
-
-- name: Create directories
-  become: yes
-  become_user: "{{ user }}"
-  file:
-    path: "{{ item }}"
-    state: directory
-    mode: 0755
-  with_items:
-    - "{{ home }}/Backup"
-    - "{{ home }}/bin"
-    - "{{ home }}/Documents"
-    - "{{ home }}/Downloads/Torrent"
-    - "{{ home }}/etc"
-    - "{{ home }}/Games/Steam"
-    - "{{ home }}/Music"
-    - "{{ home }}/Notes"
-    - "{{ home }}/opt/plantuml"
-    - "{{ home }}/org"
-    - "{{ home }}/org/calendar"
-    - "{{ home }}/org/lists"
-    - "{{ home }}/org/mobile"
-    - "{{ home }}/org/projects"
-    - "{{ home }}/Pictures"
-    - "{{ home }}/Scripts"
-    - "{{ home }}/Shared"
-    - "{{ home }}/src"
-    - "{{ home }}/tmp"
-    - "{{ home }}/Videos"
-    - "{{ home }}/Workspace"
-    - "{{ home }}/.android"
-    - "{{ home }}/.emacs.d"
-    - "{{ home }}/.emacs.d/local"
-    - "{{ home }}/.emacs.d/local/straight"
-    - "{{ home }}/.gradle"
-    - "{{ home }}/.gradle/wrapper"
-    - "{{ home }}/.m2"
-    - "{{ home }}/.vagrant.d"
-    - "{{ home }}/.var"
-    - "{{ home }}/.ansible"
-    - "{{ home }}/.ansible/tmp"
 
 - name: Link data directories
   become: yes
@@ -88,8 +83,6 @@
   with_items:
     - repo: abhigenie92/unattended_upgrades_repos
       dest: src/unattended_upgrades_repos
-    - repo: TylerBrock/mongo-hacker
-      dest: src/mongo-hacker
     - repo: mrkuz/ansible
       dest: etc/ansible
     - repo: mrkuz/dotfiles
@@ -121,12 +114,3 @@
   lineinfile:
     path: "{{ home }}/.bashrc"
     line: . ~/.bashrc.local
-
-- name: Install mongo-hacker
-  become: yes
-  become_user: "{{ user }}"
-  command: "make install"
-  args:
-    chdir: "{{ home }}/src/mongo-hacker"
-    creates: "{{ home }}/.mongorc.js"
-  when: r_user_clone_repos is not skipped
