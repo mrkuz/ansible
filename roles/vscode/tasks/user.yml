@@ -73,6 +73,7 @@
         - lfs.vscode-emacs-friendly
         - rokoroku.vscode-theme-darcula
         - vscode-icons-team.vscode-icons
+        - tombonnike.vscode-status-bar-format-toggle
         #
         - ms-azuretools.vscode-docker
         - ms-kubernetes-tools.vscode-kubernetes-tools
