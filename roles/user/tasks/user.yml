@@ -33,7 +33,11 @@
     - "{{ home }}/.m2"
     - "{{ home }}/.vagrant.d"
     - "{{ home }}/.var"
+    - "{{ home }}/.vscode/DevOps"
+    - "{{ home }}/.vscode/Java"
+    - "{{ home }}/.vscode/JavaScript"
     - "{{ home }}/.ansible/tmp"
+
 
 - name: Create user data directories
   become: yes
@@ -46,6 +50,8 @@
   with_items:
     - "/data/user/{{ user }}"
     - "/data/user/{{ user }}/opt"
+    - "/data/user/{{ user }}/src"
+    - "/data/user/{{ user }}/Backup"
     - "/data/user/{{ user }}/Downloads"
     - "/data/user/{{ user }}/Games"
     - "/data/user/{{ user }}/VirtualBox VMs"
@@ -54,6 +60,9 @@
     - "/data/user/{{ user }}/.gradle/wrapper/dists"
     - "/data/user/{{ user }}/.m2/repository"
     - "/data/user/{{ user }}/.vagrant.d/boxes"
+    - "/data/user/{{ user }}/.vscode/DevOps/extension"
+    - "/data/user/{{ user }}/.vscode/Java/extension"
+    - "/data/user/{{ user }}/.vscode/JavaScript/extension"
 
 - name: Link data directories
   become: yes
@@ -64,6 +73,8 @@
     state: link
   with_items:
     - "opt"
+    - "src"
+    - "Backup"
     - "Downloads"
     - "Games"
     - "VirtualBox VMs"
@@ -72,6 +83,9 @@
     - ".gradle/wrapper/dists"
     - ".m2/repository"
     - ".vagrant.d/boxes"
+    - ".vscode/DevOps/extension"
+    - ".vscode/Java/extension"
+    - ".vscode/JavaScript/extension"
 
 - name: "Clone repositories"
   become: yes
