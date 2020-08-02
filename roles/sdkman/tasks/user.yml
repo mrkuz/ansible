@@ -7,7 +7,7 @@
     curl -s "https://get.sdkman.io" | bash
     source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
   args:
-    executable: /usr/bin/bash
+    executable: /run/current-system/sw/bin/bash
     creates: "{{ home }}/opt/sdkman"
 
 - name: Install sdkman packages
@@ -18,7 +18,7 @@
     source "{{ home }}/opt/sdkman/bin/sdkman-init.sh"
     sdk install {{ item }}
   args:
-    executable: /usr/bin/bash
+    executable: /run/current-system/sw/bin/bash
     creates: "{{ home }}/opt/sdkman/candidates/{{ item }}"
   with_items:
     - java

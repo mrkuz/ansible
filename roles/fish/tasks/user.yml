@@ -30,15 +30,16 @@
     src: "{{ home }}/etc/dotfiles.git/{{ item }}"
     dest: "{{ home }}/{{ item }}"
     state: link
+    force: yes
   with_items:
-    - bin/fsh
+    # - bin/fsh
     - .config/fish/config.fish
     - .config/fish/fish_variables
     - .config/fish/functions/fish_prompt.fish
-    - .config/fish/functions/note.fish
-    - .config/fish/functions/scratch.fish
-    - .config/fish/functions/todo.fish
-    - .config/fish/functions/x11d.fish
+    # - .config/fish/functions/note.fish
+    # - .config/fish/functions/scratch.fish
+    # - .config/fish/functions/todo.fish
+    # - .config/fish/functions/x11d.fish
   when: r_fish_clone_repos is not skipped
 
 - name: Install fisher
@@ -55,11 +56,9 @@
   become_user: "{{ user }}"
   shell: |
     set -U fish_greeting
-    fisher add jethrokuan/fzf
     fisher add evanlucas/fish-kubectl-completions
-    set -e FZF_COMPLETE
     echo OK > {{ home }}/.var/fish.done
   args:
-    executable: /usr/bin/fish
+    executable: "{{ home }}/.nix-profile/bin/fish"
     creates: "{{ home }}/.var/fish.done"
   when: r_fish_install_fisher is not skipped

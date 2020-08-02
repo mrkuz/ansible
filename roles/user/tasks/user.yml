@@ -3,67 +3,44 @@
   become: yes
   become_user: "{{ user }}"
   file:
-    path: "{{ item }}"
+    path: "{{ home }}/{{ item }}"
     state: directory
     mode: 0755
   with_items:
-    - "{{ home }}/Backup"
-    - "{{ home }}/bin"
-    - "{{ home }}/Documents"
-    - "{{ home }}/Downloads/Torrent"
-    - "{{ home }}/etc"
-    - "{{ home }}/Games/Steam"
-    - "{{ home }}/Music"
-    - "{{ home }}/Notes"
-    - "{{ home }}/opt/plantuml"
-    - "{{ home }}/org/calendar"
-    - "{{ home }}/org/lists"
-    - "{{ home }}/org/mobile"
-    - "{{ home }}/org/projects"
-    - "{{ home }}/Pictures"
-    - "{{ home }}/Scripts"
-    - "{{ home }}/Shared"
-    - "{{ home }}/src"
-    - "{{ home }}/tmp"
-    - "{{ home }}/Videos"
-    - "{{ home }}/Workspace"
-    - "{{ home }}/.android"
-    - "{{ home }}/.emacs.d/local/straight"
-    - "{{ home }}/.gradle/wrapper"
-    - "{{ home }}/.m2"
-    - "{{ home }}/.vagrant.d"
-    - "{{ home }}/.var"
-    - "{{ home }}/.ansible/tmp"
+    - "bin"
+    - "etc"
+    - "org/calendar"
+    - "org/lists"
+    - "org/mobile"
+    - "org/projects"
+    - "tmp"
+    - "Documents"
+    - "Music"
+    - "Notes"
+    - "Pictures"
+    - "Scripts"
+    - "Shared"
+    - "Videos"
+    - "Workspace"
+    - ".android"
+    - ".emacs.d/.local/straight"
+    - ".gradle/wrapper"
+    - ".m2"
+    - ".vagrant.d"
+    - ".var"
+    - ".ansible/tmp"
+    - ".vscode/DevOps"
+    - ".vscode/Java"
+    - ".vscode/JavaScript"
 
-- name: Create user data directories
-  become: yes
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0755
-  with_items:
-    - "/data/user/{{ user }}"
-    - "/data/user/{{ user }}/opt"
-    - "/data/user/{{ user }}/Downloads"
-    - "/data/user/{{ user }}/Games"
-    - "/data/user/{{ user }}/VirtualBox VMs"
-    - "/data/user/{{ user }}/.android/avd"
-    - "/data/user/{{ user }}/.emacs.d/.local/straight/repos"
-    - "/data/user/{{ user }}/.gradle/wrapper/dists"
-    - "/data/user/{{ user }}/.m2/repository"
-    - "/data/user/{{ user }}/.vagrant.d/boxes"
-
-- name: Link data directories
-  become: yes
-  become_user: "{{ user }}"
-  file:
-    src: "/data/user/{{ user }}/{{ item }}"
-    dest: "{{ home }}/{{ item }}"
-    state: link
+- name: Setup user data directories
+  include_tasks: setup_data_dir.yml
+  vars:
+    directory: "{{ item }}"
   with_items:
     - "opt"
+    - "src"
+    - "Backup"
     - "Downloads"
     - "Games"
     - "VirtualBox VMs"
@@ -72,6 +49,9 @@
     - ".gradle/wrapper/dists"
     - ".m2/repository"
     - ".vagrant.d/boxes"
+    - ".vscode/DevOps/extensions"
+    - ".vscode/Java/extensions"
+    - ".vscode/JavaScript/extensions"
 
 - name: "Clone repositories"
   become: yes
@@ -81,14 +61,14 @@
     dest: "{{ home }}/{{ item.dest }}"
     update: no
   with_items:
-    - repo: abhigenie92/unattended_upgrades_repos
-      dest: src/unattended_upgrades_repos
     - repo: mrkuz/ansible
       dest: etc/ansible
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
     - repo: mrkuz/vagrant-k3s
       dest: src/vagrant-k3s
+    - repo: mrkuz/dockerfiles
+      dest: src/dockerfiles
   register: r_user_clone_repos
 
 - name: Link dotfiles
@@ -98,6 +78,7 @@
     src: "{{ home }}/etc/dotfiles.git/{{ item }}"
     dest: "{{ home }}/{{ item }}"
     state: link
+    force: yes
   with_items:
     - .bashrc.local
     - .eclipse-java-style.xml

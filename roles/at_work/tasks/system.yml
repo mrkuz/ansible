@@ -1,8 +1,0 @@
----
-- name: Install PIP packages
-  become: yes
-  pip:
-    executable: pip3
-    name:
-      - frida-tools
-      - mitmproxy

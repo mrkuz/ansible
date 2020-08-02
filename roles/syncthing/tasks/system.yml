@@ -1,7 +1,0 @@
----
-- name: Install syncthing
-  become: yes
-  apt:
-    update_cache: yes
-    name:
-      - syncthing

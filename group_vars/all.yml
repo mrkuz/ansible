@@ -1,4 +1,4 @@
 user: markus
 full_name: Markus
 home: "/home/{{ user }}"
-volume_group: ubuntu-vg
+

@@ -1,9 +1,0 @@
----
-- name: Install snaps
-  become: yes
-  snap:
-    classic: true
-    name:
-      - google-cloud-sdk
-      - helm
-      - kubectl

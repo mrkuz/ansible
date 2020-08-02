@@ -8,7 +8,6 @@
     mode: 0755
   with_items:
     - "{{ home }}/.vscode/{{ profile.name }}"
-    - "{{ home }}/.vscode/{{ profile.name }}/extensions"
     - "{{ home }}/.vscode/{{ profile.name }}/User"
 
 - name: "Link dotfiles - {{ profile.name }}"

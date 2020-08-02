@@ -1,26 +1,12 @@
 ---
 - name: Bootrap system
-  hosts: all
-  # hosts: localhost
-  # connection: local
+  hosts: localhost
+  connection: local
   roles:
-    # - filesystem
-    - base
-    - docker
-    - ubuntu-desktop
-    - gnome
-    - syncthing
-    - fish
+    # - base
+    - gnome #
+    - user #
+    - fish #
     - emacs
-    - google-chrome
-    - common
-    - virtualization
-    - at_home
-    # - at_work
-    - development
-    - kubernetes
-    - mesa
-    # - nvidia
-    - user
     - sdkman
     - vscode

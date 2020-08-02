@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=syncthing
-Type=Application
-Exec=/usr/bin/syncthing -no-browser
-X-GNOME-Autostart-enabled=true

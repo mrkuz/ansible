@@ -1,0 +1,16 @@
+- name: Create user data directory - {{ directory }}
+  become: yes
+  file:
+    path: "/data/user/{{ user }}/{{ directory }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+
+- name: Link user data directory - {{ directory }}
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "/data/user/{{ user }}/{{ directory }}"
+    dest: "{{ home }}/{{ directory }}"
+    state: link

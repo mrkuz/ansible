@@ -1,12 +1,4 @@
 ---
-# - name: Install plantuml
-#   become: yes
-#   become_user: "{{ user }}"
-#   get_url:
-#     url: https://downloads.sourceforge.net/project/plantuml/plantuml.jar
-#     dest: "{{ home}}/opt/plantuml/planuml.jar"
-#     mode: 0744
-
 - name: "Clone repositories"
   become: yes
   become_user: "{{ user }}"
@@ -37,6 +29,7 @@
         src: "{{ home }}/etc/doom.d"
         dest: "{{ home }}/.doom.d"
         state: link
+        force: yes
     - name: "Link doom binary"
       file:
         src: "{{ home }}/.emacs.d/bin/doom"

@@ -1,8 +1,0 @@
----
-- name: Assign KVM group
-  become: yes
-  user:
-    name: "{{ user }}"
-    groups:
-      - kvm
-    append: yes
