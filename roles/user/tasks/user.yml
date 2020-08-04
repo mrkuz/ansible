@@ -89,6 +89,12 @@
     - .gitconfig
     - .gradle/gradle.properties
     - .inputrc
+    - .local/share/applications/cups.desktop
+    - .local/share/applications/hplip.desktop
+    - .local/share/applications/htop.desktop
+    - .local/share/applications/nixos-manual.desktop
+    - .local/share/applications/nvidia-settings.desktop
+    - .local/share/applications/xterm.desktop
     - .tmux.conf
     - .shortcuts.json
   when: r_user_clone_repos is not skipped
