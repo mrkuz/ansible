@@ -65,6 +65,8 @@
       dest: etc/ansible
     - repo: mrkuz/dotfiles
       dest: etc/dotfiles.git
+    - repo: mrkuz/nixos
+      dest: etc/nixos
     - repo: mrkuz/vagrant-k3s
       dest: src/vagrant-k3s
     - repo: mrkuz/dockerfiles
@@ -81,6 +83,8 @@
     force: yes
   with_items:
     - .bashrc.local
+    - .config/nixpkgs/config.nix
+    - .config/nixpkgs/home.nix
     - .eclipse-java-style.xml
     - .gitconfig
     - .gradle/gradle.properties
