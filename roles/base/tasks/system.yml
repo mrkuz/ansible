@@ -11,3 +11,10 @@
     name: "{{ item }}"
   with_items:
     - com.github.tchx84.Flatseal
+
+- name: "Clone repositories"
+  become: yes
+  git:
+    repo: "https://github.com/NixOS/nixpkgs"
+    dest: "/nix/nixpkgs"
+    update: no
