@@ -2,7 +2,6 @@
 show-weekdate=true
 
 [org/gnome/desktop/input-sources]
-mru-sources=[('xkb', 'us'), ('xkb', 'at')]
 sources=[('xkb', 'us'), ('xkb', 'at')]
 xkb-options=['grp:shifts_toggle']
 
@@ -15,7 +14,7 @@ enable-hot-corners=false
 font-name='Ubuntu 11'
 gtk-theme='Yaru-dark'
 icon-theme='Yaru'
-monospace-font-name='Ubuntu Mono 11'
+monospace-font-name='Source Code Pro 10'
 
 [org/gnome/desktop/peripherals/keyboard]
 numlock-state=true
@@ -28,45 +27,64 @@ report-technical-problems=false
 
 [org/gnome/desktop/search-providers]
 disabled=['org.gnome.Software.desktop']
+enabled=['org.gnome.Weather.desktop']
 
 [org/gnome/desktop/wm/keybindings]
-cycle-windows=['<Alt>Escape']
-cycle-windows-backward=['<Shift><Alt>Escape']
+cycle-group=@as []
+cycle-group-backward=@as []
+cycle-panels=@as []
+cycle-panels-backward=@as []
+cycle-windows=@as []
+cycle-windows-backward=@as []
 maximize=['<Primary><Super>Up']
 minimize=@as []
 move-to-monitor-down=@as []
+move-to-monitor-left=['<Shift><Super>Left']
+move-to-monitor-right=['<Shift><Super>Right']
 move-to-monitor-up=@as []
 move-to-workspace-1=['<Shift><Super>exclam']
 move-to-workspace-2=['<Shift><Super>at']
 move-to-workspace-3=['<Shift><Super>numbersign']
 move-to-workspace-4=['<Shift><Super>dollar']
 move-to-workspace-down=['<Shift><Super>Down']
+move-to-workspace-last=@as []
 move-to-workspace-up=['<Shift><Super>Up']
+panel-main-menu=['<Super>w']
 show-desktop=['<Super>d']
-switch-applications=@as []
-switch-applications-backward=@as []
+switch-applications=['<Super>Tab']
+switch-applications-backward=['<Shift><Super>Tab']
+switch-group=@as []
+switch-group-backward=@as []
 switch-input-source=@as []
 switch-input-source-backward=@as []
+switch-panels=@as []
+switch-panels-backward=@as []
 switch-to-workspace-1=['<Super>1']
 switch-to-workspace-2=['<Super>2']
 switch-to-workspace-3=['<Super>3']
 switch-to-workspace-4=['<Super>4']
 switch-to-workspace-down=['<Super>Down']
+switch-to-workspace-last=@as []
 switch-to-workspace-up=['<Super>Up']
 switch-windows=['<Alt>Tab']
 switch-windows-backward=['<Shift><Alt>Tab']
 unmaximize=['<Primary><Super>Down']
 
 [org/gnome/desktop/wm/preferences]
-button-layout='close,minimize,maximize:appmenu'
-titlebar-font='Ubuntu Bold 11'
+button-layout='appmenu:minimize,maximize,close'
+titlebar-font='Ubuntu 11'
 
 [org/gnome/mutter]
+dynamic-workspaces=true
 edge-tiling=true
+workspaces-only-on-primary=false
 
 [org/gnome/mutter/keybindings]
 toggle-tiled-left=['<Primary><Super>Left']
 toggle-tiled-right=['<Primary><Super>Right']
+
+[org/gnome/mutter/wayland/keybindings]
+restore-shortcuts=@as []
 
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'
@@ -74,73 +92,87 @@ default-zoom-level='standard'
 [org/gnome/nautilus/preferences]
 click-policy='single'
 
-[org/gnome/pomodoro/preferences]
-enabled-plugins=['sounds']
-pause-when-idle=true
-
 [org/gnome/settings-daemon/plugins/media-keys]
+area-screenshot-clip=@as []
 calculator=['Calculator']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']
 email=['Mail']
-terminal=['<Super>t']
+magnifier=@as []
+magnifier-zoom-in=@as []
+magnifier-zoom-out=@as []
+screencast=['<Super>r']
+screenreader=@as []
+screenshot-clip=@as []
+window-screenshot-clip=@as []
+www=['HomePage']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>t'
+command='gnome-terminal'
+name='Terminal'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Super>e'
+command='emacs'
+name='Emacs'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>h'
+command='nautilus'
+name='Home'
+
+[org/gnome/settings-daemon/plugins/power]
+sleep-inactive-ac-type='nothing'
 
 [org/gnome/settings-daemon/plugins/xsettings]
 antialiasing='rgba'
 hinting='slight'
 
 [org/gnome/shell]
-enabled-extensions=['ubuntu-appindicators@ubuntu.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'remove-rounded-corners@markbokil.com', 'Shortcuts@kyle.aims.ac.za', 'switcher@landau.fi', 'transparent-top-bar@zhanghai.me', 'windowIsReady_Remover@nunofarruca@gmail.com', 'pomodoro@arun.codito.in', 'drawOnYourScreen@abakkk.framagit.org']
+enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'Shortcuts@kyle.aims.ac.za', 'transparent-top-bar@zhanghai.me', 'remove-rounded-corners@markbokil.com']
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop']
 
 [org/gnome/shell/extensions/dash-to-dock]
-background-opacity=0.5
+animate-show-apps=false
+click-action='minimize-or-previews'
 custom-theme-shrink=true
-dash-max-icon-size=48
 dock-position='BOTTOM'
-extend-height=false
 force-straight-corner=true
 hot-keys=false
-icon-size-fixed=false
 intellihide-mode='FOCUS_APPLICATION_WINDOWS'
-require-pressure-to-show=false
+isolate-workspaces=true
+preferred-monitor=0
 running-indicator-style='DEFAULT'
 scroll-action='cycle-windows'
 show-apps-at-top=true
-show-delay=0.0
 show-mounts=false
 show-show-apps-button=true
 show-trash=false
-transparency-mode='FIXED'
 
 [org/gnome/shell/extensions/shortcuts]
 shortcuts-file='/home/markus/.shortcuts.json'
 show-icon=false
 use-custom-shortcuts=true
 
-[org/gnome/shell/extensions/switcher]
-fade-enable=false
-font-size=uint32 18
-matching=uint32 1
-never-show-onboarding=true
-onboarding-1=uint32 1
-show-launcher=['<Super>space']
-
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
+open-application-menu=@as []
 toggle-message-tray=['<Super>n']
 
 [org/gnome/system/location]
-enabled=false
+enabled=true
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 audible-bell=false
-background-color='rgb(0,43,54)'
-background-transparency-percent=10
+background-color='rgb(46,52,54)'
+bold-color-same-as-fg=true
 custom-command='tmux'
-font='DejaVu Sans Mono 11'
-foreground-color='rgb(131,148,150)'
-palette=['rgb(7,54,66)', 'rgb(220,50,47)', 'rgb(133,153,0)', 'rgb(181,137,0)', 'rgb(38,139,210)', 'rgb(211,54,130)', 'rgb(42,161,152)', 'rgb(238,232,213)', 'rgb(0,43,54)', 'rgb(203,75,22)', 'rgb(88,110,117)', 'rgb(101,123,131)', 'rgb(131,148,150)', 'rgb(108,113,196)', 'rgb(147,161,161)', 'rgb(253,246,227)']
-scroll-on-output=false
+font='Source Code Pro 10'
+foreground-color='rgb(211,215,207)'
+palette=['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']
 use-custom-command=true
 use-system-font=false
 use-theme-colors=false
-use-theme-transparency=false
-use-transparent-background=true
+
+[system/locale]
+region='de_AT.UTF-8'
