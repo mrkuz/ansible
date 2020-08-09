@@ -4,8 +4,8 @@
   connection: local
   roles:
     # - base
-    - gnome #
-    - user #
+    - gnome
+    - user
     - fish #
     - emacs
     - sdkman

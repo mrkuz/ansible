@@ -16,27 +16,27 @@
     - 1708 # Transparent top bar
     - 1144 # Shortcuts
 
-#- name: Set up gnome
-#  become: yes
-#  become_user: "{{ user }}"
-#  block:
-#    - name: Create directory
-#      file:
-#        path: "{{ home }}/.var"
-#        state: directory
-#        mode: 0755
-#    - name: Copy dconf file
-#      copy:
-#        src: dconf
-#        dest: "{{ home }}/.var/dconf"
-#        owner: "{{ user }}"
-#        group: "{{ user }}"
-#        mode: "0644"
-#    - name: Import settings
-#      shell: |
-#        export $(dbus-launch)
-#        dconf load / < {{ home }}/.var/dconf
-#        echo OK > {{ home }}/.var/dconf.done
-#      args:
-#        executable: /run/current-system/sw/bin/bash
-#        creates: "{{ home }}/.var/dconf.done"
+- name: Set up gnome
+  become: yes
+  become_user: "{{ user }}"
+  block:
+    - name: Create directory
+      file:
+        path: "{{ home }}/.var"
+        state: directory
+        mode: 0755
+    - name: Copy dconf file
+      copy:
+        src: dconf
+        dest: "{{ home }}/.var/dconf"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0644"
+    - name: Import settings
+      shell: |
+        export $(dbus-launch)
+        dconf load / < {{ home }}/.var/dconf
+        echo OK > {{ home }}/.var/dconf.done
+      args:
+        executable: /run/current-system/sw/bin/bash
+        creates: "{{ home }}/.var/dconf.done"

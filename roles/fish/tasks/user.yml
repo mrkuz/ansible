@@ -32,7 +32,6 @@
     state: link
     force: yes
   with_items:
-    # - bin/fsh
     - .config/fish/config.fish
     - .config/fish/fish_variables
     - .config/fish/functions/fish_prompt.fish
