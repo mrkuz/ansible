@@ -162,6 +162,24 @@ toggle-message-tray=['<Super>n']
 [org/gnome/system/location]
 enabled=true
 
+[org/gnome/terminal/legacy/keybindings]
+close-tab='<Alt>q'
+close-window='disabled'
+copy='disabled'
+detach-tab='<Alt>d'
+find='disabled'
+find-clear='disabled'
+find-next='disabled'
+find-previous='disabled'
+full-screen='disabled'
+move-tab-left='<Shift><Alt>Left'
+move-tab-right='<Shift><Alt>Right'
+new-tab='<Alt>t'
+new-window='<Alt>n'
+next-tab='<Alt>Right'
+paste='disabled'
+prev-tab='<Alt>Left'
+
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 audible-bell=false
 background-color='rgb(46,52,54)'
