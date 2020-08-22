@@ -95,6 +95,7 @@
     - .local/share/applications/htop.desktop
     - .local/share/applications/nixos-manual.desktop
     - .local/share/applications/nvidia-settings.desktop
+    - .local/share/applications/xpra-gui.desktop
     - .local/share/applications/xterm.desktop
     - .tmux.conf
     - .shortcuts.json
