@@ -86,6 +86,7 @@
     - .bashrc.local
     - .config/nixpkgs/config.nix
     - .config/nixpkgs/home.nix
+    - .conkyrc
     - .eclipse-java-style.xml
     - .gitconfig
     - .gradle/gradle.properties
