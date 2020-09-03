@@ -86,12 +86,14 @@
     - .bashrc.local
     - .config/nixpkgs/config.nix
     - .config/nixpkgs/home.nix
+    - .config/systemd/user/conky.service
     - .conkyrc
     - .eclipse-java-style.xml
     - .gitconfig
     - .gradle/gradle.properties
     - .inputrc
     - .local/share/applications/cups.desktop
+    - .local/share/applications/conky.desktop
     - .local/share/applications/hplip.desktop
     - .local/share/applications/htop.desktop
     - .local/share/applications/nixos-manual.desktop
@@ -101,6 +103,15 @@
     - .tmux.conf
     - .shortcuts.json
   when: r_user_clone_repos is not skipped
+
+- name: Enable services
+  become: yes
+  become_user: "{{ user }}"
+  systemd:
+    daemon-reload: true
+    name: conky.service
+    scope: user
+    enabled: true
 
 - name: Configure bash
   become: yes
