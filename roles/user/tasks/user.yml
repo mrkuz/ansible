@@ -72,6 +72,8 @@
       dest: etc/nixos
     - repo: mrkuz/nix-shell
       dest: etc/nix-shell
+    - repo: mrkuz/nix-scripts
+      dest: src/nix-scripts
     - repo: mrkuz/vagrant-k3s
       dest: src/vagrant-k3s
     - repo: mrkuz/dockerfiles
@@ -106,6 +108,19 @@
     - .local/share/applications/xterm.desktop
     - .tmux.conf
     - .shortcuts.json
+  when: r_user_clone_repos is not skipped
+
+- name: Link scripts
+  become: yes
+  become_user: "{{ user }}"
+  file:
+    src: "{{ home }}/src/nix-scripts/{{ item }}"
+    dest: "{{ home }}/Scripts/{{ item }}"
+    state: link
+    force: yes
+  with_items:
+    - update.sh
+    - clean-up.sh
   when: r_user_clone_repos is not skipped
 
 - name: Initialize home-manager
