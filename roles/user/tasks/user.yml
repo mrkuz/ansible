@@ -23,6 +23,8 @@
     - "Videos"
     - "Workspace"
     - ".android"
+    - ".config/nixpkgs"
+    - ".config/systemd/user"
     - ".emacs.d/.local/straight"
     - ".gradle/wrapper"
     - ".m2"
@@ -68,6 +70,8 @@
       dest: etc/dotfiles.git
     - repo: mrkuz/nixos
       dest: etc/nixos
+    - repo: mrkuz/nix-shell
+      dest: etc/nix-shell
     - repo: mrkuz/vagrant-k3s
       dest: src/vagrant-k3s
     - repo: mrkuz/dockerfiles
@@ -104,6 +108,23 @@
     - .shortcuts.json
   when: r_user_clone_repos is not skipped
 
+- name: Initialize home-manager
+  become: yes
+  become_user: "{{ user }}"
+  shell: |
+      export NIX_PATH="nixpkgs=/nix/nixpkgs nixos-config=/etc/nixos/configuration.nix"
+      home-manager switch
+  args:
+    executable: /run/current-system/sw/bin/bash
+    creates: "{{ home }}/.nix-profile"
+
+- name: Configure bash
+  become: yes
+  become_user: "{{ user }}"
+  lineinfile:
+    path: "{{ home }}/.bashrc"
+    line: . ~/.bashrc.local
+
 - name: Enable services
   become: yes
   become_user: "{{ user }}"
@@ -112,10 +133,3 @@
     name: conky.service
     scope: user
     enabled: true
-
-- name: Configure bash
-  become: yes
-  become_user: "{{ user }}"
-  lineinfile:
-    path: "{{ home }}/.bashrc"
-    line: . ~/.bashrc.local
