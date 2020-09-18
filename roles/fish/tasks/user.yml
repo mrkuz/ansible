@@ -56,7 +56,6 @@
   shell: |
     set -U fish_greeting
     fisher add evanlucas/fish-kubectl-completions
-    fisher add reitzig/sdkman-for-fish
     echo OK > {{ home }}/.var/fish.done
   args:
     executable: "{{ home }}/.nix-profile/bin/fish"
