@@ -12,6 +12,8 @@ document-font-name='Ubuntu 11'
 enable-animations=false
 enable-hot-corners=false
 font-name='Ubuntu 11'
+gtk-im-module='gtk-im-context-simple'
+gtk-key-theme='Emacs'
 gtk-theme='Yaru-dark'
 icon-theme='Yaru'
 monospace-font-name='Source Code Pro 10'
@@ -75,8 +77,10 @@ button-layout='appmenu:minimize,maximize,close'
 titlebar-font='Ubuntu 11'
 
 [org/gnome/mutter]
+attach-modal-dialogs=true
 dynamic-workspaces=true
 edge-tiling=true
+focus-change-on-pointer-rest=true
 workspaces-only-on-primary=false
 
 [org/gnome/mutter/keybindings]
@@ -91,6 +95,7 @@ default-zoom-level='standard'
 
 [org/gnome/nautilus/preferences]
 click-policy='single'
+default-folder-viewer='icon-view'
 
 [org/gnome/settings-daemon/plugins/media-keys]
 area-screenshot-clip=@as []
@@ -122,6 +127,7 @@ command='nautilus'
 name='Home'
 
 [org/gnome/settings-daemon/plugins/power]
+idle-dim=true
 sleep-inactive-ac-type='nothing'
 
 [org/gnome/settings-daemon/plugins/xsettings]
@@ -184,6 +190,7 @@ prev-tab='<Alt>Left'
 audible-bell=false
 background-color='rgb(46,52,54)'
 bold-color-same-as-fg=true
+bold-is-bright=false
 cell-height-scale=1.0
 cell-width-scale=1.0
 cursor-blink-mode='off'
