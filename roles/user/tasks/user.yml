@@ -81,6 +81,7 @@
     force: yes
   with_items:
     - .bashrc.local
+    - .config/mimeapps.list
     - .config/nixpkgs/config.nix
     - .config/nixpkgs/home.nix
     - .config/systemd/user/conky.service
@@ -118,8 +119,8 @@
   become: yes
   become_user: "{{ user }}"
   shell: |
-      export NIX_PATH="nixpkgs=/nix/nixpkgs nixos-config=/etc/nixos/configuration.nix"
-      home-manager switch
+    export NIX_PATH="nixpkgs=/nix/nixpkgs nixos-config=/etc/nixos/configuration.nix"
+    home-manager switch
   args:
     executable: /run/current-system/sw/bin/bash
     creates: "{{ home }}/.nix-profile"
