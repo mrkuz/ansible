@@ -1,17 +1,4 @@
 ---
-- name: Set up flatpak
-  become: yes
-  flatpak_remote:
-    name: flathub
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-
-- name: Install flatpaks
-  become: yes
-  flatpak:
-    name: "{{ item }}"
-  with_items:
-    - com.github.tchx84.Flatseal
-
 - name: "Clone repositories"
   become: yes
   git:
