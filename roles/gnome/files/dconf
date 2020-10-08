@@ -16,7 +16,7 @@ gtk-im-module='gtk-im-context-simple'
 gtk-key-theme='Emacs'
 gtk-theme='Yaru-dark'
 icon-theme='Yaru'
-monospace-font-name='Source Code Pro 10'
+monospace-font-name='DejaVu Sans Mono 11'
 
 [org/gnome/desktop/peripherals/keyboard]
 numlock-state=true
