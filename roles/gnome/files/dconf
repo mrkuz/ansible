@@ -135,7 +135,7 @@ antialiasing='rgba'
 hinting='slight'
 
 [org/gnome/shell]
-enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'Shortcuts@kyle.aims.ac.za', 'transparent-top-bar@zhanghai.me', 'remove-rounded-corners@markbokil.com']
+enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'Shortcuts@kyle.aims.ac.za', 'transparent-top-bar@zhanghai.me', 'remove-rounded-corners@markbokil.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop']
 
 [org/gnome/shell/extensions/dash-to-dock]
