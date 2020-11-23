@@ -90,6 +90,7 @@
     - .gitconfig
     - .gradle/gradle.properties
     - .inputrc
+    - .local/share/applications/android-file-transfer.desktop
     - .local/share/applications/cups.desktop
     - .local/share/applications/conky.desktop
     - .local/share/applications/hplip.desktop

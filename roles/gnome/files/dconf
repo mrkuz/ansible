@@ -77,7 +77,7 @@ button-layout='appmenu:minimize,maximize,close'
 titlebar-font='Ubuntu 11'
 
 [org/gnome/mutter]
-attach-modal-dialogs=true
+attach-modal-dialogs=false
 dynamic-workspaces=true
 edge-tiling=true
 focus-change-on-pointer-rest=true
