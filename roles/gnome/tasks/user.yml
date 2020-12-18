@@ -11,11 +11,9 @@
     gnome_shell_version: "{{ r_gnome_shell_version.stdout }}"
     extension_id: "{{ item }}"
   with_items:
-    - 448 # Remove rounded corners
-    - 1007 # Window Is Ready - Notification Remover
-    - 1708 # Transparent top bar
     - 1144 # Shortcuts
     - 973 # Switcher
+    - 21 # workspace indicator
 
 - name: Set up gnome
   become: yes
