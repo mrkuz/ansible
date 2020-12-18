@@ -15,6 +15,7 @@
     - 1007 # Window Is Ready - Notification Remover
     - 1708 # Transparent top bar
     - 1144 # Shortcuts
+    - 973 # Switcher
 
 - name: Set up gnome
   become: yes

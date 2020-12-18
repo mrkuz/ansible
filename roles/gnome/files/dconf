@@ -51,7 +51,6 @@ move-to-workspace-4=['<Shift><Super>dollar']
 move-to-workspace-down=['<Shift><Super>Down']
 move-to-workspace-last=@as []
 move-to-workspace-up=['<Shift><Super>Up']
-panel-main-menu=['<Super>w']
 show-desktop=['<Super>d']
 switch-applications=['<Super>Tab']
 switch-applications-backward=['<Shift><Super>Tab']
@@ -135,7 +134,7 @@ antialiasing='rgba'
 hinting='slight'
 
 [org/gnome/shell]
-enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'Shortcuts@kyle.aims.ac.za', 'transparent-top-bar@zhanghai.me', 'remove-rounded-corners@markbokil.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'Shortcuts@kyle.aims.ac.za', 'switcher@landau.fi', 'transparent-top-bar@zhanghai.me', 'remove-rounded-corners@markbokil.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop']
 
 [org/gnome/shell/extensions/dash-to-dock]
@@ -159,6 +158,15 @@ show-trash=false
 shortcuts-file='/home/markus/.shortcuts.json'
 show-icon=false
 use-custom-shortcuts=true
+
+[org/gnome/shell/extensions/switcher]
+fade-enable=false
+font-size=uint32 18
+matching=uint32 1
+max-width-percentage=uint32 50
+never-show-onboarding=true
+onboarding-1=uint32 1
+workspace-indicator=true
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
