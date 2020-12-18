@@ -9,7 +9,7 @@ xkb-options=['grp:shifts_toggle']
 clock-show-weekday=true
 cursor-theme='Yaru'
 document-font-name='Ubuntu 11'
-enable-animations=false
+enable-animations=true
 enable-hot-corners=false
 font-name='Ubuntu 11'
 gtk-im-module='gtk-im-context-simple'
@@ -83,11 +83,13 @@ unmaximize=['<Primary><Super>Down']
 
 [org/gnome/desktop/wm/preferences]
 button-layout='appmenu:minimize,maximize,close'
+num-workspaces=9
 titlebar-font='Ubuntu 11'
+workspace-names=@as []
 
 [org/gnome/mutter]
 attach-modal-dialogs=false
-dynamic-workspaces=true
+dynamic-workspaces=false
 edge-tiling=true
 focus-change-on-pointer-rest=true
 workspaces-only-on-primary=false
@@ -144,16 +146,18 @@ antialiasing='rgba'
 hinting='slight'
 
 [org/gnome/shell]
-enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'Shortcuts@kyle.aims.ac.za', 'switcher@landau.fi', 'transparent-top-bar@zhanghai.me', 'remove-rounded-corners@markbokil.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['dash-to-panel@jderose9.github.com', 'appindicatorsupport@rgcjonas.gmail.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'windowIsReady_Remover@nunofarruca@gmail.com', 'impatience@gfxmonk.net', 'Shortcuts@kyle.aims.ac.za', 'switcher@landau.fi']
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop']
 
 [org/gnome/shell/extensions/dash-to-dock]
 animate-show-apps=false
 click-action='minimize-or-previews'
 custom-theme-shrink=true
+dash-max-icon-size=48
 dock-position='BOTTOM'
 force-straight-corner=true
 hot-keys=false
+icon-size-fixed=false
 intellihide-mode='FOCUS_APPLICATION_WINDOWS'
 isolate-workspaces=true
 preferred-monitor=0
@@ -164,6 +168,54 @@ show-mounts=false
 show-show-apps-button=true
 show-trash=false
 
+[org/gnome/shell/extensions/dash-to-panel]
+animate-app-switch=false
+animate-show-apps=true
+animate-window-launch=false
+appicon-margin=4
+appicon-padding=4
+available-monitors=[0, 1]
+click-action='MINIMIZE'
+dot-position='RIGHT'
+dot-size=3
+dot-style-focused='DOTS'
+dot-style-unfocused='DOTS'
+focus-highlight=false
+group-apps=true
+isolate-workspaces=true
+middle-click-action='LAUNCH'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedBR"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}],"1":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedBR"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
+panel-positions='{"0":"TOP","1":"TOP"}'
+panel-size=32
+peek-mode=true
+peek-mode-opacity=40
+scroll-icon-action='PASS_THROUGH'
+scroll-panel-action='CYCLE_WINDOWS'
+secondarymenu-contains-appmenu=false
+secondarymenu-contains-showdetails=false
+show-appmenu=true
+show-apps-icon-file=''
+show-apps-icon-side-padding=8
+show-apps-override-escape=true
+show-favorites=false
+show-running-apps=true
+show-showdesktop-hover=false
+show-window-previews=false
+stockgs-keep-dash=false
+stockgs-keep-top-panel=false
+stockgs-panelbtn-click-only=false
+trans-dynamic-anim-target=0.80
+trans-dynamic-anim-time=0
+trans-dynamic-behavior='MAXIMIZED_WINDOWS'
+trans-panel-opacity=0.20
+trans-use-custom-gradient=false
+trans-use-custom-opacity=true
+trans-use-dynamic-opacity=true
+window-preview-show-title=true
+
+[org/gnome/shell/extensions/net/gfxmonk/impatience]
+speed-factor=0.75
+
 [org/gnome/shell/extensions/shortcuts]
 shortcuts-file='/home/markus/.shortcuts.json'
 show-icon=false
@@ -172,11 +224,14 @@ use-custom-shortcuts=true
 [org/gnome/shell/extensions/switcher]
 fade-enable=false
 font-size=uint32 18
-matching=uint32 1
+matching=uint32 0
 max-width-percentage=uint32 50
 never-show-onboarding=true
+on-active-display=false
 onboarding-1=uint32 1
-workspace-indicator=true
+only-current-workspace=true
+ordering=uint32 1
+workspace-indicator=false
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
